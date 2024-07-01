@@ -2,8 +2,10 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 interface GameState {
-  craftingTables: Array<Array<Array<string>>>,
-  setCraftingTables: (craftingTables: Array<Array<Array<string>>>) => void
+  craftingTables: Array<Array<Array<string | null>>>;
+  setCraftingTables: (
+    craftingTables: Array<Array<Array<string | null>>>
+  ) => void;
 }
 
 const useGameState = create<GameState>()(

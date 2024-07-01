@@ -10,15 +10,15 @@ export const Crafting = ({
   return (
     <div className={classes.root}>
       <div className={classes.inventory}>
-        <Slot />
-        <Slot />
-        <Slot />
-        <Slot />
-        <Slot />
-        <Slot />
-        <Slot />
-        <Slot />
-        <Slot />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
+        <Slot item={null} onClick={() => {}} />
       </div>
       <img src={image__arrow} className={classes.arrow} />
       <div className={classes.result}>
