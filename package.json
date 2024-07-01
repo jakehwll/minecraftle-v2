@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "classcat": "^5.0.5",
-    "preact": "^10.13.1"
+    "preact": "^10.13.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",

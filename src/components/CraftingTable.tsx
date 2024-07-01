@@ -1,10 +1,18 @@
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
 
-export const CraftingTable = () => {
+export const CraftingTable = ({
+  craftingTable
+}: {
+  craftingTable: Array<Array<string>>
+}) => {
+  const onSubmit = () => {
+    // Do nothing, this is just a placeholder.
+  }
+
   return (
     <Container>
-      <Crafting />
+      <Crafting onSubmit={onSubmit} />
     </Container>
   );
 };
