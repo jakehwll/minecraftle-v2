@@ -1,10 +1,10 @@
 .root {
-    padding-left: 26px;
-    padding-right: 30px;
+    padding-left: calc(26px * var(--gui-scale));
+    padding-right: calc(30px * var(--gui-scale));
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: calc(14px * var(--gui-scale));
 }
 
 .inventory {
@@ -15,13 +15,13 @@
 }
 
 .arrow {
-    width: 44px;
-    height: 30px;
+    width: calc(44px * var(--gui-scale));
+    height: calc(30px * var(--gui-scale));
 }
 
 .result {
-    width: 48px;
-    height: 48px;
+    width: calc(48px * var(--gui-scale));
+    height: calc(48px * var(--gui-scale));
 
     background: #8B8B8B;
 
@@ -32,4 +32,17 @@
     border-image-outset: 2px;
     border-image-repeat: stretch stretch;
     border-image-source: url("./inventory.png");
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result__slot {
+    width: calc(32px * var(--gui-scale));
+    height: calc(32px * var(--gui-scale));
+}
+
+.result__slot:hover {
+    background: #9f9f9f;
 }

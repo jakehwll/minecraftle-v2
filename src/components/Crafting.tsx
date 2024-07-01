@@ -17,7 +17,9 @@ export const Crafting = () => {
         <Slot />
       </div>
       <img src={image__arrow} className={classes.arrow} />
-      <div className={classes.result} />
+      <div className={classes.result}>
+        <div className={classes.result__slot} />
+      </div>
     </div>
   );
 }
