@@ -1,0 +1,16 @@
+.root {
+
+    background: #c6c6c6;
+
+    box-sizing: content-box;
+
+    margin: 16px;
+
+    border-width: 16px;
+    border-style: solid;
+    border-image-slice: 16;
+    border-image-width: 16px;
+    border-image-outset: 16px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url("./border@2x.png");
+}

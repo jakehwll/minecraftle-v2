@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    image-rendering: pixelated;
+}
+
+html,body {
+    margin: 0;
+    padding: 0;
+
+    background: #111111 url('./background.png');
+}
+
+body {
+    padding: 32px 0px;
+}
+
+#app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 32px;
+}
+
+.logo {
+    width: 400px;
+}

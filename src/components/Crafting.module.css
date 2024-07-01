@@ -1,0 +1,35 @@
+.root {
+    padding-left: 26px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.inventory {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.arrow {
+    width: 44px;
+    height: 30px;
+}
+
+.result {
+    width: 48px;
+    height: 48px;
+
+    background: #8B8B8B;
+
+    border-width: 2px;
+    border-style: solid;
+    border-image-slice: 2;
+    border-image-width: 2px;
+    border-image-outset: 2px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url("./inventory.png");
+}

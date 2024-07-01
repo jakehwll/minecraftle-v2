@@ -1,0 +1,17 @@
+.root {
+    width: 32px;
+    height: 32px;
+    background: #8B8B8B;
+
+    border-width: 2px;
+    border-style: solid;
+    border-image-slice: 2;
+    border-image-width: 2px;
+    border-image-outset: 2px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url("./inventory.png");
+}
+
+.root:hover {
+    background: #9f9f9f;
+}
