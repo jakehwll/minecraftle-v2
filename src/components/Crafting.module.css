@@ -46,3 +46,8 @@
 .result__slot:hover {
     background: #9f9f9f;
 }
+
+.result__image {
+    width: calc(32px * var(--gui-scale));
+    height: calc(32px * var(--gui-scale));
+}
