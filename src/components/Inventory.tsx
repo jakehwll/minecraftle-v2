@@ -1,5 +1,5 @@
 import useGameState from "../hooks/useGameState";
-import { useInventory } from "../hooks/useInventory";
+import { useItems } from "../hooks/useItems";
 import useTempState from "../hooks/useTempState";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
@@ -7,39 +7,52 @@ import classes from './Inventory.module.css';
 import { Slot } from "./Slot";
 
 export const Inventory = () => {
-  const { craftingTables, setCraftingTables } =
+  const items = useItems();
+  const { inventory, setInventory, craftingTables, setCraftingTables } =
     useGameState();
   const { currentItem, setCurrentItem } =
     useTempState();
-  const inventory = useInventory();
+
+  const onSlotClick = (item: string | null, y: number, x: number) => {
+    // If we have a current item in the slot, we add it to the current item.
+    setCurrentItem(item);
+
+    // We set the current item to the slot item.
+    const newInventory = [...inventory];
+    newInventory[y][x] = currentItem;
+    setInventory(newInventory);
+  };
 
   const onSubmit = () => {
     setCraftingTables([
       ...craftingTables,
-      [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null],
-      ],
+      inventory
+    ]);
+    setInventory([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
     ]);
   };
 
   const onItemClick = (item: string | null) => {
     if ( !item ) return
-    setCurrentItem(item)
+    setCurrentItem(item);
   }
 
   return (
     <Container>
       <div className={classes.root}>
         <header>
-          <Crafting onSubmit={onSubmit} />
+          <Crafting
+            craftingTable={inventory}
+            onSlotClick={onSlotClick}
+            onSubmit={onSubmit}
+          />
         </header>
         <section className={classes.inventory}>
-          {inventory &&
-            inventory.map((item) => (
-              <Slot item={item} onClick={onItemClick} />
-            ))}
+          {items &&
+            items.map((item) => <Slot item={item} onClick={onItemClick} />)}
         </section>
       </div>
     </Container>

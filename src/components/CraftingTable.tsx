@@ -6,13 +6,11 @@ export const CraftingTable = ({
 }: {
   craftingTable: Array<Array<string | null>>
 }) => {
-  const onSubmit = () => {
-    // Do nothing, this is just a placeholder.
-  }
+  
 
   return (
     <Container>
-      <Crafting onSubmit={onSubmit} />
+      <Crafting craftingTable={craftingTable} />
     </Container>
   );
 };

@@ -21,4 +21,4 @@ const ITEMS = [
 
 
 // TODO - Make this dynamic
-export const useInventory = () => ITEMS;
+export const useItems = () => ITEMS;
