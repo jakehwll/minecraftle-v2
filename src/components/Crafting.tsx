@@ -10,7 +10,7 @@ export const Crafting = ({ onSubmit }: { onSubmit: () => void }) => {
 
   const onSlotClick = (item: string | null, y: number, x: number) => {
     // If we have a current item in the slot, we add it to the current item.
-    if ( item ) setCurrentItem(item);
+    setCurrentItem(item);
 
     // We set the current item to the slot item.
     const newInventory = [...inventory];
