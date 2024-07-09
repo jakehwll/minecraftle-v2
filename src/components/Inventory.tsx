@@ -1,4 +1,5 @@
 import useGameState from "../hooks/useGameState";
+import { useInventory } from "../hooks/useInventory";
 import useTempState from "../hooks/useTempState";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
@@ -10,6 +11,7 @@ export const Inventory = () => {
     useGameState();
   const { currentItem, setCurrentItem } =
     useTempState();
+  const inventory = useInventory();
 
   const onSubmit = () => {
     setCraftingTables([
@@ -33,35 +35,11 @@ export const Inventory = () => {
         <header>
           <Crafting onSubmit={onSubmit} />
         </header>
-        {currentItem}
         <section className={classes.inventory}>
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"stone"} onClick={onItemClick} />
-          <Slot item={"redstone"} onClick={onItemClick} />
-          <Slot item={"redstone_torch"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
-          <Slot item={"cobblestone"} onClick={onItemClick} />
+          {inventory &&
+            inventory.map((item) => (
+              <Slot item={item} onClick={onItemClick} />
+            ))}
         </section>
       </div>
     </Container>

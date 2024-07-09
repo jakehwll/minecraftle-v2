@@ -6,12 +6,18 @@ interface GameState {
   setCraftingTables: (
     craftingTables: Array<Array<Array<string | null>>>
   ) => void;
+  inventory: Array<Array<string | null>>;
+  setInventory: (inventory: Array<Array<string | null>>) => void;
 }
 
 const useGameState = create<GameState>()(
   persist((set) => ({
     craftingTables: [],
     setCraftingTables: (craftingTables) => set({ craftingTables }),
+    inventory: [
+      [null, null, null,], [null, null, null], [null, null, null],
+    ],
+    setInventory: (inventory) => set({ inventory }),
   }), {
     name: "minecraftle-game-state",
     storage: createJSONStorage(() => localStorage),

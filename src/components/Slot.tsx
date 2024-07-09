@@ -9,7 +9,13 @@ export const Slot = ({
 }) => {
   return (
     <div className={classes.root} onClick={() => onClick(item)}>
-      {item}
+      {item && (
+        <img
+          src={`items/${item.replaceAll(":", "-")}.webp`}
+          alt={item}
+          className={classes.image}
+        />
+      )}
     </div>
   );
 };
