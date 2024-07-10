@@ -10,10 +10,12 @@ import { useEffect } from "preact/hooks";
 import useTempState from "./hooks/useTempState";
 import { GameOver } from "./components/GameOver";
 import { Footer } from "./components/Footer";
+import { useUserAgent } from "./hooks/useUserAgent";
 
 export function App() {
   const { setDragging } = useTempState();
   const { craftingTables, gameState } = useGameState();
+  const { isMobile } = useUserAgent()
 
   useEffect(() => {
     const onMouseDown = (event: MouseEvent) => setDragging(event.button === 2);
@@ -28,8 +30,12 @@ export function App() {
 
   return (
     <>
-      <Cursor />
-      <Tooltip />
+      {!isMobile && (
+        <>
+          <Cursor />
+          <Tooltip />
+        </>
+      )}
       <img src={logo} className={"logo"} />
       <Game>
         {craftingTables.map((craftingTable, index) => (
