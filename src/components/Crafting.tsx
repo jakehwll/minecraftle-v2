@@ -51,7 +51,7 @@ export const Crafting = memo(({
                   onSlotClick && onSlotClick(item, i, j);
                 }}
                 onDrag={(item) => {
-                  onDrag && onDrag(item, i, j)
+                  onDrag && onDrag(item, i, j);
                 }}
                 disabled={disabled}
               />
@@ -80,6 +80,7 @@ export const Crafting = memo(({
                 )}.webp`}
                 alt={recipeResult}
                 className={classes.result__image}
+                data-tooltip={`minecraft:${recipeResult}`}
               />
             )}
           </div>
