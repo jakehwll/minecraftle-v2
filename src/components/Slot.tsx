@@ -1,7 +1,6 @@
 import cc from "classcat";
 import { MatchMapResult } from "../hooks/recipe";
 import classes from "./Slot.module.css";
-import useTempState from "../hooks/useTempState";
 
 export const Slot = ({
   item,

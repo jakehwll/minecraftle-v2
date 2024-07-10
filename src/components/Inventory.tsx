@@ -1,8 +1,9 @@
-import { checkMatchMap, checkRecipe, MatchMapResult } from "../hooks/recipe";
+import { checkRecipe } from "../hooks/recipe";
 import useGameState from "../hooks/useGameState";
 import { useItems } from "../hooks/useItems";
 import { useRecipes } from "../hooks/useRecipes";
 import useTempState from "../hooks/useTempState";
+import { Button } from "./Button";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
 import classes from "./Inventory.module.css";
@@ -82,7 +83,7 @@ export const Inventory = () => {
           />
         </header>
         <section className={classes.status}>
-          <button
+          <Button
             onClick={() =>
               setInventory([
                 [null, null, null],
@@ -92,8 +93,10 @@ export const Inventory = () => {
             }
           >
             Clear
-          </button>
-          <span>Guess {craftingTables.length} / {MAX_GUESSES}</span>
+          </Button>
+          <span>
+            Guess {craftingTables.length} / {MAX_GUESSES}
+          </span>
         </section>
         <section className={classes.inventory}>
           {items &&
