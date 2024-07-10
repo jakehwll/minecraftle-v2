@@ -1,6 +1,7 @@
 import classes from "./Crafting.module.css";
 import { Slot } from "./Slot";
 import image__arrow from "../assets/arrow.png";
+import image__arrow_disabled from "../assets/arrow_disabled.png";
 import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap, checkRecipe, MatchMapResult } from "../hooks/recipe";
 import cc from "classcat";
@@ -52,7 +53,7 @@ export const Crafting = ({
           )}
         </div>
         <img
-          src={disabled ? image__arrow : image__arrow}
+          src={recipeResult ? image__arrow : image__arrow_disabled}
           className={classes.arrow}
         />
         <div className={classes.result}>
@@ -60,8 +61,8 @@ export const Crafting = ({
             className={cc([
               classes.result__slot,
               {
-                [classes.result__slot_disabled]: disabled
-              }
+                [classes.result__slot_disabled]: disabled,
+              },
             ])}
             onClick={() => onSubmit && onSubmit()}
           >
