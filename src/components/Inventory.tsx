@@ -53,7 +53,6 @@ export const Inventory = () => {
       // If we have a recipe result, we check if it matches the solution.
       if (`minecraft:${recipeResult}` === solution.output) {
         setGameState("won");
-        return;
       }
       // We add the current inventory to the crafting tables.
       setCraftingTables([...craftingTables, inventory]);
