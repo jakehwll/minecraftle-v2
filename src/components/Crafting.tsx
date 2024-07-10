@@ -64,7 +64,7 @@ export const Crafting = ({
                 [classes.result__slot_disabled]: disabled,
               },
             ])}
-            onClick={() => onSubmit && onSubmit()}
+            onClick={() => onSubmit && recipeResult && onSubmit()}
           >
             {recipeResult && (
               <img
