@@ -1,0 +1,10 @@
+.disclaimer {
+    background-color: #232324;
+    outline: 2px black solid;
+    border: 2px #313233 solid;
+    padding: 8px 16px;
+    margin: 0px 16px;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    line-height: 2;
+}

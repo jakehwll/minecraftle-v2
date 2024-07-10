@@ -9,6 +9,7 @@ import Cursor from "./components/Cursor";
 import { useEffect } from "preact/hooks";
 import useTempState from "./hooks/useTempState";
 import { GameOver } from "./components/GameOver";
+import { Footer } from "./components/Footer";
 
 export function App() {
   const { setDragging } = useTempState();
@@ -36,6 +37,7 @@ export function App() {
         ))}
         {gameState === "inProgress" ? <Inventory /> : <GameOver />}
       </Game>
+      <Footer />
     </>
   );
 }
