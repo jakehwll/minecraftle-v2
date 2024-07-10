@@ -1,7 +1,7 @@
 .root {
   display: flex;
   flex-direction: column;
-  gap: calc(32px * var(--gui-scale));
+  gap: calc(16px * var(--gui-scale));
   margin-bottom: calc(-16px * var(--gui-scale));
   margin-left: calc(-18px * var(--gui-scale));
   margin-right: calc(-18px * var(--gui-scale));
@@ -11,4 +11,10 @@
   display: grid;
   grid-template-columns: repeat(9, minmax(0, 1fr));
   gap: 4px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
