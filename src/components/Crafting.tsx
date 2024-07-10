@@ -5,7 +5,6 @@ import image__arrow_disabled from "../assets/arrow_disabled.png";
 import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap, checkRecipe } from "../hooks/recipe";
 import cc from "classcat";
-import { memo } from "preact/compat";
 import { useTranslation } from "../hooks/useTranslation";
 
 export const Crafting = ({

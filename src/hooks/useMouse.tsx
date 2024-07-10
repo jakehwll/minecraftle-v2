@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "preact/hooks";
 
 const useMouse = () => {
     const [mouse, setMouse] = useState({ x: 0, y: 0 });
