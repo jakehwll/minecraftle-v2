@@ -34,3 +34,7 @@
 .slot__orange:hover {
     background: #eab308;
 }
+
+.slot__disabled {
+    cursor: not-allowed;
+}

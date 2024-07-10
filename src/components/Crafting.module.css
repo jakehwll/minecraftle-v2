@@ -47,6 +47,10 @@
     background: #9f9f9f;
 }
 
+.result__slot_disabled {
+    cursor: not-allowed
+}
+
 .result__image {
     width: calc(32px * var(--gui-scale));
     height: calc(32px * var(--gui-scale));

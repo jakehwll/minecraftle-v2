@@ -6,10 +6,12 @@ export const Slot = ({
   item,
   status,
   onClick,
+  disabled
 }: {
   item: string | null;
   status?: MatchMapResult;
   onClick: (item: string | null) => void;
+  disabled?: boolean;
 }) => {
   return (
     <div className={cc([
@@ -17,6 +19,7 @@ export const Slot = ({
       {
         [classes.slot__correct]: status === MatchMapResult.CORRECT,
         [classes.slot__orange]: status === MatchMapResult.ORANGE,
+        [classes.slot__disabled]: disabled
       }
     ])} onClick={() => onClick(item)}>
       {item && (

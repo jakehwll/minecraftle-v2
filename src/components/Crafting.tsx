@@ -3,17 +3,20 @@ import { Slot } from "./Slot";
 import image__arrow from "../assets/arrow.png";
 import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap, checkRecipe, MatchMapResult } from "../hooks/recipe";
+import cc from "classcat";
 
 export const Crafting = ({
   craftingTable,
   recipe,
   onSlotClick,
   onSubmit,
+  disabled
 }: {
   craftingTable: Array<Array<string | null>>;
   recipe?: Array<Array<string | null>>;
   onSlotClick?: (item: string | null, i: number, j: number) => void;
   onSubmit?: () => void;
+  disabled?: boolean;
 }) => {
   const recipes = useRecipes();
 
@@ -43,14 +46,23 @@ export const Crafting = ({
                 onClick={(item) => {
                   onSlotClick && onSlotClick(item, i, j);
                 }}
+                disabled={disabled}
               />
             ))
           )}
         </div>
-        <img src={image__arrow} className={classes.arrow} />
+        <img
+          src={disabled ? image__arrow : image__arrow}
+          className={classes.arrow}
+        />
         <div className={classes.result}>
           <div
-            className={classes.result__slot}
+            className={cc([
+              classes.result__slot,
+              {
+                [classes.result__slot_disabled]: disabled
+              }
+            ])}
             onClick={() => onSubmit && onSubmit()}
           >
             {recipeResult && (

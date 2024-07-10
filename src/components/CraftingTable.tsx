@@ -12,7 +12,7 @@ export const CraftingTable = ({
 
   return (
     <Container>
-      <Crafting recipe={recipe} craftingTable={craftingTable} />
+      <Crafting recipe={recipe} craftingTable={craftingTable} disabled />
     </Container>
   );
 };
