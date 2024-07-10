@@ -1,16 +1,19 @@
 import cc from "classcat";
 import { MatchMapResult } from "../hooks/recipe";
 import classes from "./Slot.module.css";
+import useTempState from "../hooks/useTempState";
 
 export const Slot = ({
   item,
   status,
   onClick,
+  onDrag,
   disabled,
 }: {
   item: string | null;
   status?: MatchMapResult;
-  onClick: (item: string | null) => void;
+  onClick?: (item: string | null) => void;
+  onDrag?: (item: string | null) => void;
   disabled?: boolean;
 }) => {
   return (
@@ -23,7 +26,12 @@ export const Slot = ({
           [classes.slot__disabled]: disabled,
         },
       ])}
-      onClick={() => onClick(item)}
+      onClick={() => onClick && onClick(item)}
+      onContextMenu={(event) => {
+        event.preventDefault();
+        onDrag && onDrag(item);
+      }}
+      onMouseMove={() => onDrag && onDrag(item)}
       data-tooltip={item}
     >
       {item && (

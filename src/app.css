@@ -11,6 +11,8 @@ html,body {
     margin: 0;
     padding: 0;
 
+    color: #ffffff;
+
     background-color: #111111;
     background-image: url('./background.png');
     background-size: calc(48px * var(--gui-scale));;

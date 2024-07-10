@@ -10,12 +10,14 @@ export const Crafting = ({
   craftingTable,
   recipe,
   onSlotClick,
+  onDrag,
   onSubmit,
   disabled,
 }: {
   craftingTable: Array<Array<string | null>>;
   recipe?: Array<Array<string | null>>;
   onSlotClick?: (item: string | null, i: number, j: number) => void;
+  onDrag?: (item: string | null, i: number, j: number) => void;
   onSubmit?: () => void;
   disabled?: boolean;
 }) => {
@@ -46,6 +48,9 @@ export const Crafting = ({
                 status={matchMap ? matchMap[i][j] : undefined}
                 onClick={(item) => {
                   onSlotClick && onSlotClick(item, i, j);
+                }}
+                onDrag={(item) => {
+                  onDrag && onDrag(item, i, j)
                 }}
                 disabled={disabled}
               />

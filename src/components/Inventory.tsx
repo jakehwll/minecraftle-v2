@@ -10,12 +10,23 @@ export const Inventory = () => {
   const items = useItems();
   const { inventory, setInventory, craftingTables, setCraftingTables } =
     useGameState();
-  const { currentItem, setCurrentItem } =
+  const { currentItem, setCurrentItem, dragging } =
     useTempState();
 
   const onSlotClick = (item: string | null, y: number, x: number) => {
     // If we have a current item in the slot, we add it to the current item.
-    setCurrentItem(item);
+    setCurrentItem(
+      currentItem === item ? null : item
+    );
+
+    // We set the current item to the slot item.
+    const newInventory = [...inventory];
+    newInventory[y][x] = currentItem;
+    setInventory(newInventory);
+  };
+
+  const onDrag = (_item: string | null, y: number, x: number) => {
+    if ( !currentItem || !dragging ) return
 
     // We set the current item to the slot item.
     const newInventory = [...inventory];
@@ -47,6 +58,7 @@ export const Inventory = () => {
           <Crafting
             craftingTable={inventory}
             onSlotClick={onSlotClick}
+            onDrag={onDrag}
             onSubmit={onSubmit}
           />
         </header>
