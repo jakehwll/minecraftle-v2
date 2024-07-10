@@ -37,7 +37,7 @@ export const Inventory = () => {
 
   const onItemClick = (item: string | null) => {
     if ( !item ) return
-    setCurrentItem(item);
+    setCurrentItem(item === currentItem ? null : item);
   }
 
   return (
