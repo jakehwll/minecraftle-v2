@@ -47,6 +47,15 @@ export const Inventory = () => {
       })
     ) || [null];
 
+    // We add the current inventory to the crafting tables.
+    setCraftingTables([...craftingTables, inventory]);
+    // We clear the inventory.
+    setInventory([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ]);
+
     if (craftingTables.length >= MAX_GUESSES - 1) {
       setGameState("lost");
       return;
@@ -55,14 +64,6 @@ export const Inventory = () => {
       if (`minecraft:${recipeResult}` === solution.output) {
         setGameState("won");
       }
-      // We add the current inventory to the crafting tables.
-      setCraftingTables([...craftingTables, inventory]);
-      // We clear the inventory.
-      setInventory([
-        [null, null, null],
-        [null, null, null],
-        [null, null, null],
-      ]);
     }
   };
 
