@@ -9,6 +9,7 @@ import Tooltip from "./components/Tooltip";
 import Cursor from "./components/Cursor";
 import { useEffect, useState } from "preact/hooks";
 import useTempState from "./hooks/useTempState";
+import { GameOver } from "./components/GameOver";
 
 const queryClient = new QueryClient();
 
@@ -24,8 +25,8 @@ export function App() {
     return () => {
       document.removeEventListener("mousedown", onMouseDown);
       document.removeEventListener("mouseup", onMouseUp);
-    }
-  })
+    };
+  });
 
   return (
     <>
@@ -37,7 +38,7 @@ export function App() {
           {craftingTables.map((craftingTable, index) => (
             <CraftingTable craftingTable={craftingTable} key={index} />
           ))}
-          {gameState === "inProgress" && <Inventory />}
+          {gameState === "inProgress" ? <Inventory /> : <GameOver />}
         </Game>
       </QueryClientProvider>
     </>
