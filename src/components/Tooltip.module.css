@@ -1,39 +1,45 @@
 .root {
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: #ffffff;
-    background-color: rgba(16, 0, 16, 0.94);
-    padding: 0.375em;
-    font-size: 14px;
-    word-spacing: 4px;
-    white-space: nowrap;
-    line-height: 1.25em;
-    margin: 0.125em 0.25em;
-    pointer-events: none;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #ffffff;
+  background-color: rgba(16, 0, 16, 0.95);
+  padding: 6px;
+  word-spacing: 4px;
+  white-space: nowrap;
+  line-height: 1.25em;
+  margin: 2px 4px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.root::before,
+.root::after {
+  content: "";
+  position: absolute;
 }
 
 .root::before {
-    content: "";
-    position: absolute;
-    top: 0.125em;
-    right: -0.125em;
-    bottom: 0.125em;
-    left: -0.125em;
-    border: 0.125em solid #100010;
-    border-style: none solid;
-    border-color: rgba(16, 0, 16, 0.94);
+  top: 2px;
+  right: -2px;
+  bottom: 2px;
+  left: -2px;
+  border: 2px solid #100010;
+  border-style: none solid;
+  border-color: rgba(16, 0, 16, 0.95);
 }
 
 .root::after {
-    content: "";
-    position: absolute;
-    top: 0.125em;
-    right: 0;
-    bottom: 0.125em;
-    left: 0;
-    border: 0.125em solid #2D0A63;
-    border-image: -webkit-linear-gradient(rgba(80, 0, 255, 0.31), rgba(40, 0, 127, 0.31)) 1;
-    border-image: linear-gradient(rgba(80, 0, 255, 0.31), rgba(40, 0, 127, 0.31)) 1;
+  top: 2px;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  border: 2px solid #2d0a63;
+  border-image: -webkit-linear-gradient(
+      rgba(80, 0, 255, 0.31),
+      rgba(40, 0, 127, 0.31)
+    )
+    1;
+  border-image: linear-gradient(rgba(80, 0, 255, 0.31), rgba(40, 0, 127, 0.31))
+    1;
 }
