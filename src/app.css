@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Minecraft';
-	src: url('fonts/minecraft.woff') format('woff');
+	src: url('/fonts/minecraft.woff') format('woff');
 }
 
 * {
@@ -23,7 +23,7 @@ html,body {
     text-rendering: geometricPrecision;
 
     background-color: #111111;
-    background-image: url('./background.png');
+    background-image: url('/background.png');
     background-size: calc(48px * var(--gui-scale));;
 }
 

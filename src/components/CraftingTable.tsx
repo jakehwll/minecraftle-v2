@@ -8,7 +8,7 @@ export const CraftingTable = ({
   craftingTable: Array<Array<string | null>>
 }) => {
   const recipes = useRecipes();
-  const recipe = recipes["crafting_table"].input;
+  const recipe = recipes["campfire"].input;
 
   return (
     <Container>

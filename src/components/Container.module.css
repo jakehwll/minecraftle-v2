@@ -12,5 +12,5 @@
     border-image-outset: calc(16px * var(--gui-scale));
     border-image-slice: 16;
     border-image-repeat: stretch stretch;
-    border-image-source: url("./border.png");
+    border-image-source: url("/border.png");
 }

@@ -9,7 +9,7 @@
     border-image-width: 2px;
     border-image-outset: 2px;
     border-image-repeat: stretch stretch;
-    border-image-source: url("./inventory.png");
+    border-image-source: url("/inventory.png");
 
     display: flex;
     align-items: center;

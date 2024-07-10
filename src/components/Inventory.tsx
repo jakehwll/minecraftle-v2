@@ -37,7 +37,7 @@ export const Inventory = () => {
   const MAX_GUESSES = 10;
 
   const recipes = useRecipes();
-  const solution = recipes["crafting_table"];
+  const solution = recipes["campfire"];
 
   const onSubmit = () => {
     const [recipeResult] = Object.entries(recipes).find(([_, recipeItems]) =>
