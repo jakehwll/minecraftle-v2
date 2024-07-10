@@ -2,8 +2,7 @@ import classes from "./Crafting.module.css";
 import { Slot } from "./Slot";
 import image__arrow from "../assets/arrow.png";
 import { useRecipes } from "../hooks/useRecipes";
-import { checkRecipe } from "../hooks/recipe";
-import { useCallback } from "preact/hooks";
+import { checkMatchMap, checkRecipe } from "../hooks/recipe";
 
 export const Crafting = ({
   craftingTable,
@@ -17,11 +16,22 @@ export const Crafting = ({
   const recipes = useRecipes();
 
   const [recipeResult] = Object.entries(recipes).find(([_, recipeItems]) =>
-    checkRecipe(recipeItems.input, craftingTable)
+    checkRecipe({
+      recipe: recipeItems.input,
+      input: craftingTable,
+    })
   ) || [null];
+
+  const ANSWER = "leather_leggings";
+  const matchMap = checkMatchMap({
+    recipe: recipes[ANSWER].input,
+    input: craftingTable,
+  });
 
   return (
     <>
+      <pre>{ANSWER}</pre>
+      <pre>{JSON.stringify(matchMap, null, 2)}</pre>
       <div className={classes.root}>
         <div className={classes.inventory}>
           {new Array(3).fill(null).map((_, i) =>
