@@ -2,14 +2,16 @@ import classes from "./Crafting.module.css";
 import { Slot } from "./Slot";
 import image__arrow from "../assets/arrow.png";
 import { useRecipes } from "../hooks/useRecipes";
-import { checkMatchMap, checkRecipe } from "../hooks/recipe";
+import { checkMatchMap, checkRecipe, MatchMapResult } from "../hooks/recipe";
 
 export const Crafting = ({
   craftingTable,
+  recipe,
   onSlotClick,
   onSubmit,
 }: {
   craftingTable: Array<Array<string | null>>;
+  recipe?: Array<Array<string | null>>;
   onSlotClick?: (item: string | null, i: number, j: number) => void;
   onSubmit?: () => void;
 }) => {
@@ -22,22 +24,22 @@ export const Crafting = ({
     })
   ) || [null];
 
-  const ANSWER = "leather_leggings";
-  const matchMap = checkMatchMap({
-    recipe: recipes[ANSWER].input,
-    input: craftingTable,
-  });
+  const matchMap = recipe
+    ? checkMatchMap({
+        recipe,
+        input: craftingTable,
+      })
+    : null;
 
   return (
     <>
-      <pre>{ANSWER}</pre>
-      <pre>{JSON.stringify(matchMap, null, 2)}</pre>
       <div className={classes.root}>
         <div className={classes.inventory}>
           {new Array(3).fill(null).map((_, i) =>
             new Array(3).fill(null).map((_, j) => (
               <Slot
                 item={craftingTable[i][j]}
+                status={matchMap ? matchMap[i][j] : undefined}
                 onClick={(item) => {
                   onSlotClick && onSlotClick(item, i, j);
                 }}

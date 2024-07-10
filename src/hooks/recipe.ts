@@ -1,7 +1,8 @@
-enum MatchMapResult {
+export enum MatchMapResult {
   DEFAULT = "Default",
   CORRECT = "Correct",
   WRONG = "Wrong",
+  ORANGE = "Orange",
 }
 
 type MatchMap = Array<Array<MatchMapResult>>;
@@ -114,18 +115,22 @@ const generateVariationWithReflections = ({
   ];
 };
 
-const matchMapWithWrongSlots = ({ guess, correctSlots }: { guess: Table; correctSlots: MatchMap }) => {
+const matchMapWithWrongSlots = ({ recipe, input, correctSlots }: { 
+  recipe: Table;
+  input: Table; 
+  correctSlots: MatchMap
+}) => {
   let n_items: { [key: string]: number } = {};
 
   // first pass initiliases all item dict entries to 0
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (guess[i][j] === null || guess[i][j] === undefined) {
+      if (input[i][j] === null || input[i][j] === undefined) {
         continue;
       }
 
-      if (n_items[guess[i][j]!] === undefined) {
-        n_items[guess[i][j]!] = 0;
+      if (n_items[input[i][j]!] === undefined) {
+        n_items[input[i][j]!] = 0;
       }
     }
   }
@@ -133,18 +138,18 @@ const matchMapWithWrongSlots = ({ guess, correctSlots }: { guess: Table; correct
   // Second pass counts how many of each item are correct
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (guess[i][j] === null || guess[i][j] === undefined) {
+      if (input[i][j] === null || input[i][j] === undefined) {
         continue;
       }
 
       if (correctSlots[i][j] === MatchMapResult.CORRECT) {
-        n_items[guess[i][j]!]++;
+        n_items[input[i][j]!]++;
       }
     }
   }
 
   // finds how many of each item are left to be identified
-  let n_unidentified_items = guess.reduce(
+  let n_unidentified_items = recipe.reduce(
     (acc: { [key: string]: number }, row) => {
       row.forEach((item) => {
         if (item !== null && item !== undefined) {
@@ -166,16 +171,16 @@ const matchMapWithWrongSlots = ({ guess, correctSlots }: { guess: Table; correct
   // final pass marks (at most n) orange slots for each item in n_unidentified_items
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (guess[i][j] === null || guess[i][j] === undefined) {
+      if (input[i][j] === null || input[i][j] === undefined) {
         continue;
       }
 
       if (
         correctSlots[i][j] !== MatchMapResult.CORRECT &&
-        n_unidentified_items[guess[i][j]!] > 0
+        n_unidentified_items[input[i][j]!] > 0
       ) {
-        correctSlots[i][j] = MatchMapResult.WRONG;
-        n_unidentified_items[guess[i][j]!]--;
+        correctSlots[i][j] = MatchMapResult.ORANGE;
+        n_unidentified_items[input[i][j]!]--;
       }
     }
   }
@@ -227,7 +232,8 @@ export const checkMatchMap = ({ recipe, input }: { recipe: Table; input: Table }
 
   // Finally we return the match map with the wrong slots marked.
   return matchMapWithWrongSlots({
-    guess: input,
+    recipe,
+    input: input,
     correctSlots: bestMatch.matchMap,
   });
 };
