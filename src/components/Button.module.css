@@ -1,0 +1,10 @@
+.root {
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
+  border: 2px solid #000000;
+  color: white;
+  background: url('button-background.png');
+  text-shadow: 2px 2px #000000;
+  padding: 4px 8px;
+}
