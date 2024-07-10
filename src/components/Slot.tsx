@@ -6,7 +6,7 @@ export const Slot = ({
   item,
   status,
   onClick,
-  disabled
+  disabled,
 }: {
   item: string | null;
   status?: MatchMapResult;
@@ -14,14 +14,18 @@ export const Slot = ({
   disabled?: boolean;
 }) => {
   return (
-    <div className={cc([
-      classes.root,
-      {
-        [classes.slot__correct]: status === MatchMapResult.CORRECT,
-        [classes.slot__orange]: status === MatchMapResult.ORANGE,
-        [classes.slot__disabled]: disabled
-      }
-    ])} onClick={() => onClick(item)}>
+    <div
+      className={cc([
+        classes.root,
+        {
+          [classes.slot__correct]: status === MatchMapResult.CORRECT,
+          [classes.slot__orange]: status === MatchMapResult.ORANGE,
+          [classes.slot__disabled]: disabled,
+        },
+      ])}
+      onClick={() => onClick(item)}
+      data-tooltip={item}
+    >
       {item && (
         <img
           src={`items/${item.replaceAll(":", "-")}.webp`}

@@ -11,7 +11,7 @@ export const Crafting = ({
   recipe,
   onSlotClick,
   onSubmit,
-  disabled
+  disabled,
 }: {
   craftingTable: Array<Array<string | null>>;
   recipe?: Array<Array<string | null>>;
@@ -64,7 +64,7 @@ export const Crafting = ({
                 [classes.result__slot_disabled]: disabled,
               },
             ])}
-            onClick={() => onSubmit && recipeResult && onSubmit()}
+            onClick={() => recipeResult && onSubmit && onSubmit()}
           >
             {recipeResult && (
               <img

@@ -1,0 +1,11 @@
+.root {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    width: calc(32px * var(--gui-scale));
+    height: calc(32px * var(--gui-scale));
+    margin: auto;
+    background-size: cover;
+    image-rendering: pixelated;
+    z-index: 100000;
+}

@@ -21,6 +21,7 @@
 }
 
 .image {
+    pointer-events: none;
     width: calc(32px * var(--gui-scale));
     height: calc(32px * var(--gui-scale));
 }
