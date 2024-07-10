@@ -1,6 +1,7 @@
 import cc from "classcat";
 import { MatchMapResult } from "../hooks/recipe";
 import classes from "./Slot.module.css";
+import { useTranslation } from "../hooks/useTranslation";
 
 export const Slot = ({
   item,
@@ -31,7 +32,7 @@ export const Slot = ({
         onDrag && onDrag(item);
       }}
       onMouseMove={() => onDrag && onDrag(item)}
-      data-tooltip={item}
+      data-tooltip={useTranslation(item)}
     >
       {item && (
         <img

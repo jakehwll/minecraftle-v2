@@ -6,6 +6,7 @@ import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap, checkRecipe } from "../hooks/recipe";
 import cc from "classcat";
 import { memo } from "preact/compat";
+import { useTranslation } from "../hooks/useTranslation";
 
 export const Crafting = memo(({
   craftingTable,
@@ -80,7 +81,7 @@ export const Crafting = memo(({
                 )}.webp`}
                 alt={recipeResult}
                 className={classes.result__image}
-                data-tooltip={`minecraft:${recipeResult}`}
+                data-tooltip={useTranslation(`minecraft:${recipeResult}`)}
               />
             )}
           </div>
