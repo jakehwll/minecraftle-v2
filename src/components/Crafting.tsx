@@ -5,8 +5,9 @@ import image__arrow_disabled from "../assets/arrow_disabled.png";
 import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap, checkRecipe, MatchMapResult } from "../hooks/recipe";
 import cc from "classcat";
+import { memo } from "preact/compat";
 
-export const Crafting = ({
+export const Crafting = memo(({
   craftingTable,
   recipe,
   onSlotClick,
@@ -86,4 +87,4 @@ export const Crafting = ({
       </div>
     </>
   );
-};
+});
