@@ -1,5 +1,7 @@
+import { checkMatchMap, checkRecipe, MatchMapResult } from "../hooks/recipe";
 import useGameState from "../hooks/useGameState";
 import { useItems } from "../hooks/useItems";
+import { useRecipes } from "../hooks/useRecipes";
 import useTempState from "../hooks/useTempState";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
@@ -8,7 +10,7 @@ import { Slot } from "./Slot";
 
 export const Inventory = () => {
   const items = useItems();
-  const { inventory, setInventory, craftingTables, setCraftingTables } =
+  const { inventory, setInventory, craftingTables, setCraftingTables, setGameState } =
     useGameState();
   const { currentItem, setCurrentItem, dragging } = useTempState();
 
@@ -33,11 +35,26 @@ export const Inventory = () => {
 
   const MAX_GUESSES = 10;
 
+  const recipes = useRecipes();
+  const solution = recipes["crafting_table"];
+
   const onSubmit = () => {
+    const [recipeResult] = Object.entries(recipes).find(([_, recipeItems]) =>
+      checkRecipe({
+        recipe: recipeItems.input,
+        input: inventory,
+      })
+    ) || [null];
+
     if (craftingTables.length >= MAX_GUESSES - 1) {
-      alert(`You have reached the limit of ${MAX_GUESSES} guesses.`);
+      setGameState("lost");
       return;
     } else {
+      // If we have a recipe result, we check if it matches the solution.
+      if (`minecraft:${recipeResult}` === solution.output) {
+        setGameState("won");
+        return;
+      }
       // We add the current inventory to the crafting tables.
       setCraftingTables([...craftingTables, inventory]);
       // We clear the inventory.
@@ -46,11 +63,6 @@ export const Inventory = () => {
         [null, null, null],
         [null, null, null],
       ]);
-      // We check to see if the crafting table is correct.
-      const correct = craftingTables.length === 6;
-      if (correct) {
-        alert("You have guessed all the crafting tables correctly!");
-      }
     }
   };
 

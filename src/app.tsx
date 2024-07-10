@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 
 export function App() {
   const { setDragging } = useTempState();
-  const { craftingTables } = useGameState();
+  const { craftingTables, gameState } = useGameState();
 
   useEffect(() => {
     const onMouseDown = (event: MouseEvent) => setDragging(event.button === 2);
@@ -37,7 +37,7 @@ export function App() {
           {craftingTables.map((craftingTable, index) => (
             <CraftingTable craftingTable={craftingTable} key={index} />
           ))}
-          <Inventory />
+          {gameState === "inProgress" && <Inventory />}
         </Game>
       </QueryClientProvider>
     </>
