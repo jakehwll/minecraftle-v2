@@ -8,7 +8,7 @@ import cc from "classcat";
 import { memo } from "preact/compat";
 import { useTranslation } from "../hooks/useTranslation";
 
-export const Crafting = memo(({
+export const Crafting = ({
   craftingTable,
   recipe,
   onSlotClick,
@@ -89,4 +89,4 @@ export const Crafting = memo(({
       </div>
     </>
   );
-});
+};
