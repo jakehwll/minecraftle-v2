@@ -27,7 +27,9 @@ export const Header = () => (
       >
         <Button>How to Play</Button>
       </Modal>
-      <Button>Settings</Button>
+      <Modal title={"Settings"} description={"Change how the game looks here!"} content={<></>}>
+        <Button>Settings</Button>
+      </Modal>
     </div>
   </header>
 );
