@@ -11,8 +11,13 @@ import { Slot } from "./Slot";
 
 export const Inventory = () => {
   const items = useItems();
-  const { inventory, setInventory, craftingTables, setCraftingTables, setGameState } =
-    useGameState();
+  const {
+    inventory,
+    setInventory,
+    craftingTables,
+    setCraftingTables,
+    setGameState,
+  } = useGameState();
   const { currentItem, setCurrentItem, dragging } = useTempState();
 
   const onSlotClick = (item: string | null, y: number, x: number) => {
@@ -91,6 +96,9 @@ export const Inventory = () => {
                 [null, null, null],
                 [null, null, null],
               ])
+            }
+            disabled={
+              inventory.flat().filter((item) => item !== null).length === 0
             }
           >
             Clear

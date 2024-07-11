@@ -1,13 +1,27 @@
 .root {
   appearance: none;
+  border: none;
   font: inherit;
   cursor: pointer;
+  line-height: 1;
 
-  background-image: url("/button-background.png");
+  background-image: url("/background-button.png");
   background-color: #696969;
-  border: 2px solid #000000;
+  /* border: 2px solid #000000; */
+  border-image: url("/border-button.png") 3 / 6px / 6px;
   color: white;
 
   text-shadow: 2px 2px #000000;
-  padding: 4px 8px;
+  padding: 0px 8px 4px 8px;
+  margin: 6px;
+}
+
+.root:hover:not(:disabled) {
+  border-image: url("/border-button__highlight.png") 3 / 6px / 6px;
+}
+
+.root:disabled {
+  cursor: not-allowed;
+  border-image: url("/border-button__disabled.png") 3 / 6px / 6px;
+  background-image: url("/background-button__disabled.png");
 }
