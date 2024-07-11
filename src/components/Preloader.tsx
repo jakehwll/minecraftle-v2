@@ -22,7 +22,6 @@ export const Preloader = () => {
             const img = new Image();
             img.src = `${src}`;
             img.onload = resolve;
-            console.log("Loaded", src)
           });
         })
       );
