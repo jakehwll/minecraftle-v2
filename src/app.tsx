@@ -12,6 +12,7 @@ import { Footer } from "./components/Footer";
 import { useUserAgent } from "./hooks/useUserAgent";
 import { format } from "date-fns";
 import { Header } from "./components/Header";
+import { Preloader } from "./components/Preloader";
 
 export function App() {
   const { setDragging } = useTempState();
@@ -53,6 +54,7 @@ export function App() {
 
   return (
     <>
+      <Preloader />
       {!isMobile && (
         <>
           <Cursor />
