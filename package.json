@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.1",
     "@types/bun": "^1.1.6",
     "classcat": "^5.0.5",
     "date-fns": "^3.6.0",
