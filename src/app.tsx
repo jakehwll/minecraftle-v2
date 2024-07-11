@@ -2,7 +2,6 @@ import "./app.css";
 import { CraftingTable } from "./components/CraftingTable";
 import { Game } from "./components/Game";
 import { Inventory } from "./components/Inventory";
-import logo from "./assets/logo.png";
 import useGameState from "./hooks/useGameState";
 import Tooltip from "./components/Tooltip";
 import Cursor from "./components/Cursor";
@@ -12,11 +11,10 @@ import { GameOver } from "./components/GameOver";
 import { Footer } from "./components/Footer";
 import { useUserAgent } from "./hooks/useUserAgent";
 import { format } from "date-fns";
-import { useRecipes } from "./hooks/useRecipes";
+import { Header } from "./components/Header";
 
 export function App() {
   const { setDragging } = useTempState();
-  const recipes = useRecipes()
   const {
     date,
     setCraftingTables,
@@ -61,9 +59,7 @@ export function App() {
           <Tooltip />
         </>
       )}
-      <header>
-        <img src={logo} className={"logo"} />
-      </header>
+      <Header />
       <Game>
         {craftingTables.map((craftingTable, index) => (
           <CraftingTable craftingTable={craftingTable} key={index} />
