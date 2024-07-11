@@ -26,7 +26,10 @@ export const Slot = ({
           [classes.slot__disabled]: disabled,
         },
       ])}
-      onClick={() => onClick && onClick(item)}
+      onMouseDown={(event) => {
+        if ( event.button !== 0 ) return
+        onClick && onClick(item);
+      }}
       onContextMenu={(event) => {
         event.preventDefault();
         onDrag && onDrag(item);
