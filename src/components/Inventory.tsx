@@ -104,7 +104,7 @@ export const Inventory = () => {
             Clear
           </Button>
           <span>
-            Guess {craftingTables.length} / {MAX_GUESSES}
+            Guess {craftingTables.length+1} / {MAX_GUESSES}
           </span>
         </section>
         <section className={classes.inventory}>
