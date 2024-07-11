@@ -1,21 +1,18 @@
 .root {
-    max-width: 100%;
+  max-width: 100%;
 
-    background: #c6c6c6;
-    color: #000000;
+  background: #c6c6c6;
+  color: #000000;
 
-    box-sizing: content-box;
+  box-sizing: content-box;
 
-    margin: calc(16px * var(--gui-scale));
+  margin: calc(16px * var(--gui-scale));
 
-    border-style: solid;
-    border-width: calc(16px * var(--gui-scale));
-    border-image-width: calc(16px * var(--gui-scale));
-    border-image-outset: calc(16px * var(--gui-scale));
-    border-image-slice: 16;
-    border-image-repeat: stretch stretch;
-    border-image-source: url("/border.png");
+  border-style: solid;
+  border-width: calc(16px * var(--gui-scale));
+  border-image: url("/border.png") 16 / calc(16px * var(--gui-scale)) /
+    calc(16px * var(--gui-scale)) stretch;
 
-    transform: perspective(1px) scale(1);
-    perspective: 1px;
+  transform: perspective(1px) scale(1);
+  perspective: 1px;
 }

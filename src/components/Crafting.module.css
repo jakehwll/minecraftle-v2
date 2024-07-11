@@ -1,60 +1,53 @@
 .root {
-    padding-left: calc(34px * var(--gui-scale));
-    padding-right: calc(38px * var(--gui-scale));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: calc(14px * var(--gui-scale));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(14px * var(--gui-scale));
+
+  padding: 0px calc(34px * var(--gui-scale)) 0px calc(38px * var(--gui-scale));
 }
 
 .inventory {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, minmax(0, 1fr));
-    gap: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 4px;
 }
 
 .arrow {
-    width: calc(44px * var(--gui-scale));
-    height: calc(30px * var(--gui-scale));
+  width: calc(44px * var(--gui-scale));
+  height: calc(30px * var(--gui-scale));
 }
 
 .result {
-    width: calc(48px * var(--gui-scale));
-    height: calc(48px * var(--gui-scale));
+  width: calc(48px * var(--gui-scale));
+  height: calc(48px * var(--gui-scale));
 
-    background: #8B8B8B;
+  background: #8b8b8b;
 
-    border-width: 2px;
-    border-style: solid;
-    border-image-slice: 2;
-    border-image-width: 2px;
-    border-image-outset: 2px;
-    border-image-repeat: stretch stretch;
-    border-image-source: url("/inventory.png");
-    
-    transform: perspective(1px) scale(1);
-    perspective: 1px;
+  border-width: 2px;
+  border-style: solid;
+  border-image: url("/inventory.png") 2 / 2px / 2px stretch;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .result__slot {
-    width: calc(32px * var(--gui-scale));
-    height: calc(32px * var(--gui-scale));
+  width: calc(32px * var(--gui-scale));
+  height: calc(32px * var(--gui-scale));
 }
 
 .result__slot:hover {
-    background: #9f9f9f;
+  background: #9f9f9f;
 }
 
 .result__slot_disabled {
-    cursor: not-allowed
+  cursor: not-allowed;
 }
 
 .result__image {
-    width: calc(32px * var(--gui-scale));
-    height: calc(32px * var(--gui-scale));
+  width: calc(32px * var(--gui-scale));
+  height: calc(32px * var(--gui-scale));
 }

@@ -12,9 +12,11 @@ import { GameOver } from "./components/GameOver";
 import { Footer } from "./components/Footer";
 import { useUserAgent } from "./hooks/useUserAgent";
 import { format } from "date-fns";
+import { useRecipes } from "./hooks/useRecipes";
 
 export function App() {
   const { setDragging } = useTempState();
+  const recipes = useRecipes()
   const {
     date,
     setCraftingTables,
@@ -22,9 +24,9 @@ export function App() {
     setGameState,
     setDate,
     craftingTables,
-    gameState
+    gameState,
   } = useGameState();
-  const { isMobile } = useUserAgent()
+  const { isMobile } = useUserAgent();
 
   useEffect(() => {
     const onMouseDown = (event: MouseEvent) => setDragging(event.button === 2);
@@ -39,7 +41,7 @@ export function App() {
 
   useEffect(() => {
     const DATE_STRING = format(new Date(), "yyyy-MM-dd");
-    if (DATE_STRING === date ) return
+    if (DATE_STRING === date) return;
     setDate(DATE_STRING);
     setGameState("inProgress");
     setCraftingTables([]);
@@ -49,7 +51,7 @@ export function App() {
       [null, null, null],
     ]);
     setGameState("inProgress");
-  }, [])
+  }, []);
 
   return (
     <>
@@ -59,7 +61,9 @@ export function App() {
           <Tooltip />
         </>
       )}
-      <img src={logo} className={"logo"} />
+      <header>
+        <img src={logo} className={"logo"} />
+      </header>
       <Game>
         {craftingTables.map((craftingTable, index) => (
           <CraftingTable craftingTable={craftingTable} key={index} />

@@ -11,10 +11,12 @@ export default function Tooltip() {
   return (
     <div
       className={classes.root}
-      style={{
-        left: x + 10,
-        top: y - 30,
-      }}
+      style={
+        {
+          "--cursor-x": `${x + 16}px`,
+          "--cursor-y": `${y - 32}px`,
+        } as React.CSSProperties
+      }
     >
       {tooltipValue}
     </div>

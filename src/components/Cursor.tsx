@@ -10,14 +10,17 @@ export default function Cursor() {
     ? `url(items/${currentItem.replaceAll(":", "-")}.webp)`
     : undefined;
 
+  if ( !currentItem ) return null
+
   return (
     <div
       className={classes.root}
       style={{
-        left: x,
-        top: y,
+        "--cursor-x": `${x}px`,
+        "--cursor-y": `${y}px`,
         backgroundImage: backgroundItem,
-      }}
+        backgroundSize: 'cover'
+      } as React.CSSProperties}
     />
   );
 }

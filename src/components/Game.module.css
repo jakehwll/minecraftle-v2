@@ -1,7 +1,7 @@
 .root {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: calc(16px * var(--gui-scale));
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: calc(16px * var(--gui-scale));
 }

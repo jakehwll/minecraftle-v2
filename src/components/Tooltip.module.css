@@ -1,16 +1,20 @@
 .root {
   position: fixed;
-  top: 0;
-  left: 0;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+
+  background: rgba(16, 0, 16, 0.95);
   color: #ffffff;
-  background-color: rgba(16, 0, 16, 0.95);
+
   padding: 6px;
+  margin: 2px 4px;
+
   word-spacing: 4px;
   white-space: nowrap;
-  line-height: 1.25em;
-  margin: 2px 4px;
+  line-height: 20px;
+
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9998;
 }
 
 .root::before,

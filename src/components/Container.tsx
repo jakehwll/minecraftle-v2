@@ -6,10 +6,10 @@ export const Container = ({
   children,
   className,
   ...props
-}: ComponentProps<"div">) => {
+}: ComponentProps<"article">) => {
   return (
-    <div className={cc([classes.root, className])} {...props}>
+    <section className={cc([classes.root, className])} {...props}>
       {children}
-    </div>
+    </section>
   );
 };

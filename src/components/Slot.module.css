@@ -1,44 +1,37 @@
 .root {
-    width: calc(34px * var(--gui-scale));
-    height: calc(34px * var(--gui-scale));
-    background: #8B8B8B;
+  width: calc(34px * var(--gui-scale));
+  height: calc(34px * var(--gui-scale));
+  background: #8b8b8b;
 
-    border-width: 2px;
-    border-style: solid;
-    border-image-slice: 2;
-    border-image-width: 2px;
-    border-image-outset: 2px;
-    border-image-repeat: stretch stretch;
-    border-image-source: url("/inventory.png");
-    
-    transform: perspective(1px) scale(1);
-    perspective: 1px;
+  border-width: 2px;
+  border-style: solid;
+  border-image: url("/inventory.png") 2 / 2px / 2px stretch;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .root:hover {
-    background: #9f9f9f;
+  background: #9f9f9f;
 }
 
 .image {
-    pointer-events: none;
-    width: calc(32px * var(--gui-scale));
-    height: calc(32px * var(--gui-scale));
+  pointer-events: none;
+  width: calc(32px * var(--gui-scale));
+  height: calc(32px * var(--gui-scale));
 }
 
 .slot__correct,
 .slot__correct:hover {
-    background: #22c55e;
+  background: #22c55e;
 }
 
 .slot__orange,
 .slot__orange:hover {
-    background: #eab308;
+  background: #eab308;
 }
 
 .slot__disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
