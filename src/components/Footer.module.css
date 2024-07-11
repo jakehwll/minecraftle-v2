@@ -1,3 +1,11 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
 .disclaimer {
   background-color: #232324;
   outline: 2px black solid;
