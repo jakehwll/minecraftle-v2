@@ -5,6 +5,7 @@ import { Button } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
 import { User } from "lucia";
+import { Form } from "@remix-run/react";
 
 export const Header = ({
   user
@@ -72,9 +73,11 @@ export const Header = ({
           title={"Discord"}
           description="In order to track your scores and use the leaderboard, you need to authenticate with Discord!"
           content={
-            <Button fullWidth onClick={() => {}}>
-              Link my account
-            </Button>
+            <Form method="post" action="/auth/discord" className={classes.form}>
+              <Button fullWidth type="submit">
+                Link my account
+              </Button>
+            </Form>
           }
         >
           <Button>Account</Button>

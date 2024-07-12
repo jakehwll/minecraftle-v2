@@ -29,10 +29,6 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async ({ request }) =>
   authLoader(request);
 
-export async function clientLoader() {
-  return null;
-}
-
 export default function App() {
   const { setDragging } = useTempState();
   const {
