@@ -6,8 +6,33 @@
 }
 
 .logo {
+  position: relative;
+}
+
+.logo__image {
   width: 400px;
   max-width: 100%;
+}
+
+.logo__text {
+  position: absolute;
+  right: -32px;
+  bottom: 8px;
+  color: yellow;
+  transform: rotate(-10deg);
+  animation: identifier 1s infinite linear;
+}
+
+@keyframes identifier {
+  0% {
+    transform: rotate(-10deg) scale(1);
+  }
+  50% {
+    transform: rotate(-10deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(-10deg) scale(1);
+  }
 }
 
 .grid {

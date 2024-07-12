@@ -9,7 +9,12 @@ export const Header = () => {
 
   return (
     <header className={classes.root}>
-      <img src={logo} className={classes.logo} />
+      <div className={classes.logo}>
+        <img src={logo} className={classes.logo__image} />
+        <span className={classes.logo__text}>
+          New & Improved!
+        </span>
+      </div>
       <div className={classes.grid}>
         <Modal
           title={"How to Play"}
