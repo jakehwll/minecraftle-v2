@@ -9,10 +9,6 @@
     user-select: none;
 }
 
-:root {
-    --gui-scale: 1;
-}
-
 html,body {
     margin: 0;
     padding: 0;

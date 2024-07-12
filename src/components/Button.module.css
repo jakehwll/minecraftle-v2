@@ -27,3 +27,7 @@
   border-image: url("/border-button__disabled.png") 3 / 6px / 6px;
   background-image: url("/background-button__disabled.png");
 }
+
+.fullWidth {
+  width: 100%;
+}

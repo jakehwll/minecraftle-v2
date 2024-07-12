@@ -13,6 +13,7 @@ import { useUserAgent } from "./hooks/useUserAgent";
 import { format } from "date-fns";
 import { Header } from "./components/Header";
 import { Preloader } from "./components/Preloader";
+import { GameOptions } from "./components/GameOptions";
 
 export function App() {
   const { setDragging } = useTempState();
@@ -54,6 +55,7 @@ export function App() {
 
   return (
     <>
+      <GameOptions />
       <Preloader />
       {!isMobile && (
         <>
