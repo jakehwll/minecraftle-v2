@@ -9,7 +9,7 @@ interface GameOptions {
 const useGameOptions = create<GameOptions>()(
   persist(
     (set) => ({
-      guiScale: 1.5,
+      guiScale: 1,
       setGuiScale: (guiScale: number) => set({ guiScale: guiScale }),
     }),
     {
