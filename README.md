@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://minecraftle2.vercel.app">
-    <img src="./src/assets/logo.png" style="width: 256px">
+    <img src="./src/assets/logo.webp" style="width: 256px">
   </a>
 
   <h1>

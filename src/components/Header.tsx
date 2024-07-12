@@ -1,5 +1,5 @@
 import classes from "./Header.module.css";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import { Button } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
