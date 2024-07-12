@@ -7,6 +7,7 @@ import {
   Title,
   Description,
   Close,
+  DialogProps,
 } from "@radix-ui/react-dialog";
 import { Button } from "./Button";
 import classes from "./Modal.module.css";
@@ -16,14 +17,18 @@ export const Modal = ({
   description,
   content,
   children,
+  props,
 }: {
   title: string;
-  description: string;
+  description?: string;
   content: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  props?: {
+    root: DialogProps;
+  };
 }) => {
   return (
-    <Root>
+    <Root {...props?.root}>
       <Trigger asChild>{children}</Trigger>
       <Portal>
         <Overlay className={classes.overlay} />

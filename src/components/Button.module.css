@@ -16,8 +16,10 @@
   margin: 6px;
 }
 
-.root:hover:not(:disabled) {
+.root:hover:not(:disabled),
+.root:focus:not(:disabled) {
   border-image: url("/border-button__highlight.png") 3 / 6px / 6px;
+  outline: none;
 }
 
 .root:disabled {

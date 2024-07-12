@@ -1,17 +1,50 @@
 import useGameState from "../hooks/useGameState";
-import { Container } from "./Container";
+import { Button } from "./Button";
+import { Crafting } from "./Crafting";
+import { Modal } from "./Modal";
 import classes from "./GameOver.module.css";
+import { useEffect, useState } from "preact/hooks";
 
 export const GameOver = () => {
-  const { gameState } = useGameState();
+  const { gameState, craftingTables } = useGameState();
+  const [shared, setShared] = useState(false);
 
-  const { craftingTables } = useGameState();
+  useEffect(() => {
+    if (!shared) return;
+    navigator.clipboard.writeText("Test!");
+    setTimeout(() => setShared(false), 3000);
+  }, [shared]);
 
   return (
-    <Container className={classes.root}>
-      {gameState === "won" ? <h1>You win!</h1> : <h1>Game Over</h1>}
-      <p>You took {craftingTables.length} guesses!</p>
-      <p>Minecraftle {new Date().toISOString().split("T")[0]}</p>
-    </Container>
+    <Modal
+      title={`Solution: Crafting Table`}
+      content={
+        <>
+          <div className={classes.crafting}>
+            <Crafting
+              craftingTable={craftingTables[craftingTables.length - 1]}
+              disabled
+            />
+          </div>
+          <p>
+            {gameState === "won"
+              ? `You won! Took ${craftingTables.length} ${
+                  craftingTables.length > 1 ? `guesses` : `guess`
+                }.`
+              : "You've run out of guesses!"}
+          </p>
+          <Button className={classes.button} onClick={() => setShared(true)}>
+            {shared ? "Copied!" : "Share"}
+          </Button>
+        </>
+      }
+      props={{
+        root: {
+          defaultOpen: true,
+        },
+      }}
+    >
+      <Button>View Results</Button>
+    </Modal>
   );
 };
