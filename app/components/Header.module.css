@@ -7,6 +7,9 @@
 
 .logo {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo__image {
@@ -37,6 +40,20 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+}
+
+.discord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #232324;
+  outline: 2px black solid;
+  border: 2px #313233 solid;
+  padding: 2px 16px;
+  margin: 0px 16px;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
 }

@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import { type LoaderFunction, type MetaFunction } from "@remix-run/node";
 import "../app.css";
 import { CraftingTable } from "../components/CraftingTable";
 import { Game } from "../components/Game";
@@ -15,6 +15,9 @@ import { format } from "date-fns";
 import { Header } from "../components/Header";
 import { Preloader } from "../components/Preloader";
 import { GameOptions } from "../components/GameOptions";
+import { authLoader } from "~/utils/authLoader.server";
+import { useLoaderData } from "@remix-run/react";
+import { User } from "lucia";
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,6 +25,9 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Wordle with a Minecraft Twist!" },
   ];
 };
+
+export const loader: LoaderFunction = async ({ request }) =>
+  authLoader(request);
 
 export async function clientLoader() {
   return null;
@@ -39,6 +45,10 @@ export default function App() {
     gameState,
   } = useGameState();
   const { isMobile } = useUserAgent();
+
+  const user = useLoaderData<{
+    user: User | null;
+  }>();
 
   useEffect(() => {
     const onMouseDown = (event: MouseEvent) => setDragging(event.button === 2);
@@ -75,7 +85,7 @@ export default function App() {
           <Tooltip />
         </>
       )}
-      <Header />
+      <Header user={user.user} />
       <Game>
         {craftingTables.map((craftingTable, index) => (
           <CraftingTable craftingTable={craftingTable} key={index} />
