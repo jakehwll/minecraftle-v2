@@ -61,6 +61,7 @@ export const Crafting = ({
         <img
           src={recipeResult ? image__arrow : image__arrow_disabled}
           className={classes.arrow}
+          alt={""}
         />
         <div className={classes.result}>
           <div

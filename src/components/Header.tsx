@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <header className={classes.root}>
       <div className={classes.logo}>
-        <img src={logo} className={classes.logo__image} />
+        <img src={logo} className={classes.logo__image} alt={""} />
         <span className={classes.logo__text}>
           New & Improved!
         </span>
