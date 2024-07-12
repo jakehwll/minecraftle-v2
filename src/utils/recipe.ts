@@ -3,6 +3,7 @@ export enum MatchMapResult {
   CORRECT = "Correct",
   WRONG = "Wrong",
   ORANGE = "Orange",
+  UNUSED = "Unused",
 }
 
 export type MatchMap = Array<Array<MatchMapResult>>;
@@ -14,7 +15,6 @@ const deepTableComparison = ({
 }: {
   recipe: Table;
   input: Table;
-  matchOnly?: string | number;
 }): {
   matchMap: MatchMap;
   matchCount: number;
