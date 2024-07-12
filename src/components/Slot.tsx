@@ -23,6 +23,7 @@ export const Slot = ({
         {
           [classes.slot__correct]: status === MatchMapResult.CORRECT,
           [classes.slot__orange]: status === MatchMapResult.ORANGE,
+          [classes.slot__unused]: status === MatchMapResult.UNUSED,
           [classes.slot__disabled]: disabled,
         },
       ])}

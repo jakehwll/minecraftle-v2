@@ -1,4 +1,4 @@
-import { checkRecipe } from "../utils/recipe";
+import { checkMatchMap, checkRecipe, MatchMapResult } from "../utils/recipe";
 import useGameState from "../hooks/useGameState";
 import { useItems } from "../hooks/useItems";
 import { useRecipes } from "../hooks/useRecipes";
@@ -77,6 +77,40 @@ export const Inventory = () => {
     setCurrentItem(item === currentItem ? null : item);
   };
 
+  const getSlotStatus = ({
+    item,
+    craftingTables,
+    recipe,
+  }: {
+    item: string;
+    craftingTables: Array<Array<Array<string | null>>>;
+    recipe: (string | null)[][];
+  }) => {
+    const usedItems = craftingTables
+      .map((craftingTable) =>
+        checkMatchMap({
+          recipe,
+          input: craftingTable,
+        })
+      )
+      .flat()
+      .flat()
+      .filter((matchMapResult) => matchMapResult.item === item);
+    console.log(item, usedItems);
+    if (usedItems.find(({ result }) => result === MatchMapResult.CORRECT)) {
+      return MatchMapResult.CORRECT;
+    } else if (
+      usedItems.find(({ result }) => result === MatchMapResult.ORANGE)
+    ) {
+      return MatchMapResult.ORANGE;
+    } else if (
+      usedItems.find(({ result }) => result === MatchMapResult.DEFAULT)
+    ) {
+      return MatchMapResult.UNUSED;
+    }
+    return MatchMapResult.DEFAULT;
+  };
+
   return (
     <Container>
       <div className={classes.root}>
@@ -104,12 +138,22 @@ export const Inventory = () => {
             Clear
           </Button>
           <span>
-            Guess {craftingTables.length+1} / {MAX_GUESSES}
+            Guess {craftingTables.length + 1} / {MAX_GUESSES}
           </span>
         </section>
         <section className={classes.inventory}>
           {items &&
-            items.map((item) => <Slot item={item} onClick={onItemClick} />)}
+            items.map((item) => (
+              <Slot
+                item={item}
+                onClick={onItemClick}
+                status={getSlotStatus({
+                  item,
+                  craftingTables,
+                  recipe: solution.input,
+                })}
+              />
+            ))}
         </section>
       </div>
     </Container>

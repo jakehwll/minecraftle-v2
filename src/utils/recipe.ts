@@ -6,7 +6,10 @@ export enum MatchMapResult {
   UNUSED = "Unused",
 }
 
-export type MatchMap = Array<Array<MatchMapResult>>;
+export type MatchMap = Array<Array<{
+  item: string | null;
+  result: MatchMapResult;
+}>>;
 export type Table = Array<Array<string | null>>;
 
 const deepTableComparison = ({
@@ -21,8 +24,11 @@ const deepTableComparison = ({
   isMatch: boolean;
 } => {
   // Instantiate an empty matchmap with default values
-  let matchMap: MatchMap = Array.from({ length: 3 }, () =>
-    Array.from({ length: 3 }, () => MatchMapResult.DEFAULT)
+  let matchMap: MatchMap = Array.from({ length: 3 }, (_, y) =>
+    Array.from({ length: 3 }, (_, x) => ({
+      item: input[y][x],
+      result: MatchMapResult.DEFAULT
+    }))
   );
 
   // Get the size of the recipe, this varies between 1x1 and 3x3.
@@ -43,10 +49,16 @@ const deepTableComparison = ({
       if (recipe[i][j] === input[i][j]) {
         if (recipe[i][j] === null) {
           // If the item is air.
-          matchMap[i][j] = MatchMapResult.DEFAULT;
+          matchMap[i][j] = {
+            item: input[i][j],
+            result: MatchMapResult.DEFAULT,
+          };
         } else {
           // If the match is correct and an item.
-          matchMap[i][j] = MatchMapResult.CORRECT;
+          matchMap[i][j] = {
+            item: input[i][j],
+            result: MatchMapResult.CORRECT,
+          };
         }
       } else {
         // Our recipe and input don't match.
@@ -58,7 +70,7 @@ const deepTableComparison = ({
   // Count the number of correct matches.
   const matchCount = matchMap
     .flat()
-    .filter((match) => match === MatchMapResult.CORRECT).length;
+    .filter((match) => match.result === MatchMapResult.CORRECT).length;
 
   return {
     matchMap,
@@ -148,7 +160,7 @@ const matchMapWithWrongSlots = ({
         continue;
       }
 
-      if (correctSlots[i][j] === MatchMapResult.CORRECT) {
+      if (correctSlots[i][j].result === MatchMapResult.CORRECT) {
         n_items[input[i][j]!]++;
       }
     }
@@ -182,10 +194,10 @@ const matchMapWithWrongSlots = ({
       }
 
       if (
-        correctSlots[i][j] !== MatchMapResult.CORRECT &&
+        correctSlots[i][j].result !== MatchMapResult.CORRECT &&
         n_unidentified_items[input[i][j]!] > 0
       ) {
-        correctSlots[i][j] = MatchMapResult.ORANGE;
+        correctSlots[i][j].result = MatchMapResult.ORANGE;
         n_unidentified_items[input[i][j]!]--;
       }
     }

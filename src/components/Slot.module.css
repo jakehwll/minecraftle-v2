@@ -35,3 +35,8 @@
 .slot__disabled {
   cursor: not-allowed;
 }
+
+.slot__unused,
+.slot__unused:hover {
+  background: #6d6d6d;
+}
