@@ -1,8 +1,11 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { parseCookies } from "oslo/cookie";
 import { prisma } from "~/utils/database";
-import { initializeArcticDiscord, Profile } from "~/utils/discord";
-import { initializeLucia } from "~/utils/lucia";
+import { discord, Profile } from "~/utils/discord";
+import { lucia } from "~/utils/lucia";
+
+const DISCORD_API_URL = "https://discord.com/api/v10";
+const DISCORD_ENDPOINT_IDENTIFY = `${DISCORD_API_URL}/users/@me`;
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const cookies = parseCookies(request.headers.get("Cookie") ?? "");
@@ -20,33 +23,21 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   }
 
   try {
-    const discord = initializeArcticDiscord();
     const tokens = await discord.validateAuthorizationCode(code);
-    const response = await fetch("https://discord.com/api/v10/users/@me", {
+    const response = await fetch(DISCORD_ENDPOINT_IDENTIFY, {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
       },
     });
 
     const profile = (await response.json()) as Profile;
-    const lucia = initializeLucia();
 
-    const existsUser = await prisma.user.findFirst({
-      where: {
+    const user = await prisma.user.upsert({
+      create: {
         id: profile.id,
       },
-    });
-
-    if (existsUser) {
-      const session = await lucia.createSession(existsUser.id.toString(), {});
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      return redirect("/", {
-        headers: [["Set-Cookie", sessionCookie.serialize()]],
-      });
-    }
-
-    const user = await prisma.user.create({
-      data: {
+      update: {},
+      where: {
         id: profile.id,
       },
     });
@@ -59,10 +50,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     });
   } catch (error) {
     console.error(error);
-    return redirect("/login");
+    return redirect("/");
   }
 };
 
-export default function Empty() {
+export default function Page() {
   return null;
 }

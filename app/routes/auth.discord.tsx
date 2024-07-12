@@ -1,12 +1,11 @@
 import { redirect } from "@remix-run/node";
 import { generateCodeVerifier, generateState } from "arctic";
 import { serializeCookie } from "oslo/cookie";
-import { initializeArcticDiscord } from "~/utils/discord";
+import { discord } from "~/utils/discord";
 
 export const action = async () => {
   const state = generateState();
   const codeVerifier = generateCodeVerifier();
-  const discord = initializeArcticDiscord();
 
   const url: URL = await discord.createAuthorizationURL(state, {
     scopes: ["identify", "email"],

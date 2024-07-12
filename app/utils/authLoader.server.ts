@@ -1,7 +1,6 @@
-import { initializeLucia } from "~/utils/lucia";
+import { lucia } from "./lucia";
 
 export const authLoader = async (request: Request) => {
-  const lucia = initializeLucia();
   const cookie = request.headers.get("Cookie");
   if (!cookie) return { user: null, session: null };
   const sessionId = lucia.readSessionCookie(cookie);

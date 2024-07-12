@@ -22,15 +22,8 @@ export interface Profile {
   verified: boolean;
 }
 
-let discord: Discord | null = null;
-
-export const initializeArcticDiscord = () => {
-  if (discord) return discord;
-  const {
-    DISCORD_AUTH_CLIENT_ID: clientId,
-    DISCORD_AUTH_CLIENT_SECRET: clientSecret,
-    DISCORD_AUTH_CALLBACK_URL: redirectURI,
-  } = process.env;
-  discord = new Discord(clientId ?? "", clientSecret ?? "", redirectURI ?? "");
-  return discord;
-};
+export const discord = new Discord(
+  process.env.DISCORD_AUTH_CLIENT_ID ?? "",
+  process.env.DISCORD_AUTH_CLIENT_SECRET ?? "",
+  process.env.DISCORD_AUTH_CALLBACK_URL ?? ""
+);
