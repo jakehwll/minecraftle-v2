@@ -2,14 +2,14 @@ import { MatchMap, MatchMapResult } from "./recipe";
 
 export const matchMapToEmoji = ({ matchMap }: { matchMap: MatchMap }) => {
   return matchMap.map((row) =>
-    row.map((cell) => {
+    row.map(({ result }) => {
       switch (true) {
-        case cell === MatchMapResult.DEFAULT:
-        case cell === MatchMapResult.WRONG:
+        case result === MatchMapResult.DEFAULT:
+        case result === MatchMapResult.WRONG:
           return "⬛";
-        case cell === MatchMapResult.ORANGE:
+        case result === MatchMapResult.ORANGE:
           return "🟨";
-        case cell === MatchMapResult.CORRECT:
+        case result === MatchMapResult.CORRECT:
           return "🟩";
         default:
           break;
