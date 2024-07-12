@@ -151,6 +151,7 @@ export const Inventory = () => {
                   craftingTables,
                   recipe: solution.input,
                 })}
+                key={`${item}`}
               />
             ))}
         </section>

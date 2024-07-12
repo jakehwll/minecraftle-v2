@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
 import classes from "./Preloader.module.css";
 
 const ASSETS_TO_PRELOAD = [

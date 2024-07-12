@@ -24,10 +24,11 @@ export const Modal = ({
   content: React.ReactNode;
   children?: React.ReactNode;
   props?: {
-    root: DialogProps;
+    root?: DialogProps;
   };
 }) => {
   return (
+    // eslint-disable-next-line react/prop-types
     <Root {...props?.root}>
       <Trigger asChild>{children}</Trigger>
       <Portal>

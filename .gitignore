@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+minecraftle-remix/node_modules
 dist
 dist-ssr
 *.local
@@ -25,3 +26,6 @@ dist-ssr
 
 # Utils
 utils/recipes
+
+# Build files
+build

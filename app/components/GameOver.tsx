@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { Crafting } from "./Crafting";
 import { Modal } from "./Modal";
 import classes from "./GameOver.module.css";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
 import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap } from "../utils/recipe";
 import { matchMapToEmoji } from "../utils/emoji";

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
 
 const useTooltip = () => {
   const [value, setValue] = useState<string>("");

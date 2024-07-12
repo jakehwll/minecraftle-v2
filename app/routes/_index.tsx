@@ -1,21 +1,33 @@
-import "./app.css";
-import { CraftingTable } from "./components/CraftingTable";
-import { Game } from "./components/Game";
-import { Inventory } from "./components/Inventory";
-import useGameState from "./hooks/useGameState";
-import Tooltip from "./components/Tooltip";
-import Cursor from "./components/Cursor";
-import { useEffect } from "preact/hooks";
-import useTempState from "./hooks/useTempState";
-import { GameOver } from "./components/GameOver";
-import { Footer } from "./components/Footer";
-import { useUserAgent } from "./hooks/useUserAgent";
+import type { MetaFunction } from "@remix-run/node";
+import "../app.css";
+import { CraftingTable } from "../components/CraftingTable";
+import { Game } from "../components/Game";
+import { Inventory } from "../components/Inventory";
+import useGameState from "../hooks/useGameState";
+import Tooltip from "../components/Tooltip";
+import Cursor from "../components/Cursor";
+import { useEffect } from "react";
+import useTempState from "../hooks/useTempState";
+import { GameOver } from "../components/GameOver";
+import { Footer } from "../components/Footer";
+import { useUserAgent } from "../hooks/useUserAgent";
 import { format } from "date-fns";
-import { Header } from "./components/Header";
-import { Preloader } from "./components/Preloader";
-import { GameOptions } from "./components/GameOptions";
+import { Header } from "../components/Header";
+import { Preloader } from "../components/Preloader";
+import { GameOptions } from "../components/GameOptions";
 
-export function App() {
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Minecraftle" },
+    { name: "description", content: "Wordle with a Minecraft Twist!" },
+  ];
+};
+
+export async function clientLoader() {
+  return null;
+}
+
+export default function App() {
   const { setDragging } = useTempState();
   const {
     date,

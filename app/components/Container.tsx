@@ -1,5 +1,5 @@
 import cc from "classcat";
-import { ComponentProps } from "preact";
+import { ComponentProps } from "react";
 import classes from "./Container.module.css";
 
 export const Container = ({

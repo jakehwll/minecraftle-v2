@@ -54,6 +54,7 @@ export const Crafting = ({
                   onDrag && onDrag(item, i, j);
                 }}
                 disabled={disabled}
+                key={`crafting-${i}-${j}`}
               />
             ))
           )}

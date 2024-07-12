@@ -1,5 +1,5 @@
 import cc from "classcat"
-import { ComponentProps } from "preact"
+import { ComponentProps } from "react"
 import classes from "./Game.module.css"
 
 export const Game = ({ children, className, ...props }: ComponentProps<"main">) => {

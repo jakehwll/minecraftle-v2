@@ -28,7 +28,7 @@ export const Header = () => {
               <p>
                 Everytime you submit an answer your shown the items in their
                 correct spots (marked in green), items that are apart of the
-                recipe (marked in orange) and if the item doesn't appear in the
+                recipe (marked in orange) and if the item doesn&apos;t appear in the
                 recipe it stays greyed out.
               </p>
             </>

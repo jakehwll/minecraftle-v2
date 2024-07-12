@@ -1,5 +1,5 @@
 import cc from "classcat";
-import { ComponentProps } from "preact/compat";
+import { ComponentProps } from "react";
 import classes from "./Button.module.css";
 
 interface ButtonProps extends ComponentProps<"button"> {
