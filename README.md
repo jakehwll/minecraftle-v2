@@ -34,7 +34,8 @@ bun dev
 ## Build
 
 ```sh
-# TODO
+bun install
+bun run build
 ```
 
 ## Community
