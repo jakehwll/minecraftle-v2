@@ -31,10 +31,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const profile = (await response.json()) as Profile;
     const lucia = initializeLucia();
 
-    console.log({
-      profile,
-    });
-
     const existsUser = await prisma.user.findFirst({
       where: {
         id: profile.id,
