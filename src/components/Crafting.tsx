@@ -46,7 +46,7 @@ export const Crafting = ({
             new Array(3).fill(null).map((_, j) => (
               <Slot
                 item={craftingTable[i][j]}
-                status={matchMap ? matchMap[i][j] : undefined}
+                status={matchMap ? matchMap[i][j].result : undefined}
                 onClick={(item) => {
                   onSlotClick && onSlotClick(item, i, j);
                 }}
