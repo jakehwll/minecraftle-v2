@@ -1,4 +1,4 @@
-import { checkRecipe } from "../hooks/recipe";
+import { checkRecipe } from "../utils/recipe";
 import useGameState from "../hooks/useGameState";
 import { useItems } from "../hooks/useItems";
 import { useRecipes } from "../hooks/useRecipes";

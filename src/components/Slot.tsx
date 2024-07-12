@@ -1,5 +1,5 @@
 import cc from "classcat";
-import { MatchMapResult } from "../hooks/recipe";
+import { MatchMapResult } from "../utils/recipe";
 import classes from "./Slot.module.css";
 import { useTranslation } from "../hooks/useTranslation";
 

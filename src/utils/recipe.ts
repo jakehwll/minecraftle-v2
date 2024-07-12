@@ -5,8 +5,8 @@ export enum MatchMapResult {
   ORANGE = "Orange",
 }
 
-type MatchMap = Array<Array<MatchMapResult>>;
-type Table = Array<Array<string | null>>;
+export type MatchMap = Array<Array<MatchMapResult>>;
+export type Table = Array<Array<string | null>>;
 
 const deepTableComparison = ({
   recipe,
@@ -56,7 +56,9 @@ const deepTableComparison = ({
   }
 
   // Count the number of correct matches.
-  const matchCount = matchMap.flat().filter((match) => match === MatchMapResult.CORRECT).length;
+  const matchCount = matchMap
+    .flat()
+    .filter((match) => match === MatchMapResult.CORRECT).length;
 
   return {
     matchMap,
@@ -115,10 +117,14 @@ const generateVariationWithReflections = ({
   ];
 };
 
-const matchMapWithWrongSlots = ({ recipe, input, correctSlots }: { 
+const matchMapWithWrongSlots = ({
+  recipe,
+  input,
+  correctSlots,
+}: {
   recipe: Table;
-  input: Table; 
-  correctSlots: MatchMap
+  input: Table;
+  correctSlots: MatchMap;
 }) => {
   let n_items: { [key: string]: number } = {};
 
@@ -189,9 +195,11 @@ const matchMapWithWrongSlots = ({ recipe, input, correctSlots }: {
 };
 
 export const checkRecipe = ({
-  recipe, input
+  recipe,
+  input,
 }: {
-  recipe: Table, input: Table
+  recipe: Table;
+  input: Table;
 }): boolean => {
   // This function checks if the input matches the recipe.
   // It does this by generating all possible variations of the recipe.
@@ -200,7 +208,7 @@ export const checkRecipe = ({
   const allRecipeVariants = generateVariationWithReflections({
     solution: recipe,
   });
-  
+
   return allRecipeVariants.some(
     (variant) =>
       deepTableComparison({
@@ -210,10 +218,16 @@ export const checkRecipe = ({
   );
 };
 
-export const checkMatchMap = ({ recipe, input }: { recipe: Table; input: Table }) => {
+export const checkMatchMap = ({
+  recipe,
+  input,
+}: {
+  recipe: Table;
+  input: Table;
+}): MatchMap => {
   // This looks a tad crazy but it's just a way to find the best match
   // out of all the possible variations of the recipe.
-  
+
   // What were doing here is basically..
   // 1. Find all possible variations of the recipe.
   // 2. Find all matches out of all the variations.
