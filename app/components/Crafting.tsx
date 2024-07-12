@@ -37,6 +37,7 @@ export const Crafting = ({
         input: craftingTable,
       })
     : null;
+  const translation = useTranslation(`minecraft:${recipeResult}`)
 
   return (
     <>
@@ -82,7 +83,7 @@ export const Crafting = ({
                 )}.webp`}
                 alt={recipeResult}
                 className={classes.result__image}
-                data-tooltip={useTranslation(`minecraft:${recipeResult}`)}
+                data-tooltip={translation}
               />
             )}
           </div>
