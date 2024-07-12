@@ -96,7 +96,6 @@ export const Inventory = () => {
       .flat()
       .flat()
       .filter((matchMapResult) => matchMapResult.item === item);
-    console.log(item, usedItems);
     if (usedItems.find(({ result }) => result === MatchMapResult.CORRECT)) {
       return MatchMapResult.CORRECT;
     } else if (
