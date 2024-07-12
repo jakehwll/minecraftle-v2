@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
-    "@types/bun": "^1.1.6",
     "@remix-run/node": "^2.10.2",
     "@remix-run/react": "^2.10.2",
     "@remix-run/serve": "^2.10.2",
+    "@types/bun": "^1.1.6",
+    "@vercel/remix": "^2.10.2",
     "classcat": "^5.0.5",
     "date-fns": "^3.6.0",
     "isbot": "^4.1.0",
