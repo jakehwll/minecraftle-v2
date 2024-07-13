@@ -7,11 +7,7 @@ import useGameOptions from "../hooks/useGameOptions";
 import { User } from "lucia";
 import { Form } from "@remix-run/react";
 
-export const Header = ({
-  user
-}: {
-  user: User | null
-}) => {
+export const Header = ({ user }: { user: User | null }) => {
   const { guiScale, setGuiScale } = useGameOptions();
 
   return (
@@ -71,17 +67,22 @@ export const Header = ({
         </Modal>
         <Modal
           title={"Discord"}
-          description="In order to track your scores and use the leaderboard, you need to authenticate with Discord!"
+          description={
+            user
+              ? "We're currently tracking your scores and you can view the leaderboard!"
+              : "In order to track your scores and use the leaderboard, you need to authenticate with Discord!"
+          }
           content={
             <Form method="post" action="/auth/discord" className={classes.form}>
               <Button fullWidth type="submit">
-                Link my account
+                {user ? "Re-link my account" : "Link my account"}
               </Button>
             </Form>
           }
         >
           <Button>Account</Button>
         </Modal>
+        <Button>Statistics</Button>
       </div>
       {user && (
         <div className={classes.discord}>

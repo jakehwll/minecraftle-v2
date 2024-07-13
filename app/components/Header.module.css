@@ -21,7 +21,8 @@
   position: absolute;
   right: -32px;
   bottom: 8px;
-  color: yellow;
+  color: #FCFC00;
+  text-shadow: 2px 2px #3E3E00;
   transform: rotate(-10deg);
   animation: identifier 1s infinite linear;
 }
@@ -40,8 +41,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
 }
 
 .discord {
