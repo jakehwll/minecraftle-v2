@@ -11,10 +11,19 @@ import useTempState from "./hooks/useTempState";
 import { GameOver } from "./components/GameOver";
 import { Footer } from "./components/Footer";
 import { useUserAgent } from "./hooks/useUserAgent";
+import { format } from "date-fns";
 
 export function App() {
   const { setDragging } = useTempState();
-  const { craftingTables, gameState } = useGameState();
+  const {
+    date,
+    setCraftingTables,
+    setInventory,
+    setGameState,
+    setDate,
+    craftingTables,
+    gameState
+  } = useGameState();
   const { isMobile } = useUserAgent()
 
   useEffect(() => {
@@ -27,6 +36,20 @@ export function App() {
       document.removeEventListener("mouseup", onMouseUp);
     };
   });
+
+  useEffect(() => {
+    const DATE_STRING = format(new Date(), "yyyy-MM-dd");
+    if (DATE_STRING === date ) return
+    setDate(DATE_STRING);
+    setGameState("inProgress");
+    setCraftingTables([]);
+    setInventory([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ]);
+    setGameState("inProgress");
+  }, [])
 
   return (
     <>

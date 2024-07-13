@@ -10,6 +10,9 @@
     border-image-outset: 2px;
     border-image-repeat: stretch stretch;
     border-image-source: url("/inventory.png");
+    
+    transform: perspective(1px) scale(1);
+    perspective: 1px;
 
     display: flex;
     align-items: center;

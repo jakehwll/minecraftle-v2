@@ -15,4 +15,7 @@
     border-image-slice: 16;
     border-image-repeat: stretch stretch;
     border-image-source: url("/border.png");
+
+    transform: perspective(1px) scale(1);
+    perspective: 1px;
 }
