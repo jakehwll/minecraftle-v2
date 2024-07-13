@@ -29,3 +29,9 @@ utils/recipes
 
 # Build files
 build
+
+# Env
+.env
+.env.*
+!.env.example
+.vercel
