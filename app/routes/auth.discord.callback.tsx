@@ -35,10 +35,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const user = await prisma.user.upsert({
       create: {
         id: profile.id,
+        username: profile.username,
       },
-      update: {},
       where: {
         id: profile.id,
+      },
+      update: {
+        username: profile.username,
       },
     });
 

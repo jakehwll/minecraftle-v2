@@ -83,11 +83,13 @@ export const Header = ({
           <Button>Account</Button>
         </Modal>
       </div>
-      <div className={classes.discord}>
-        <img src={discord} alt={""} />
-        <span>Welcome back {user?.id}!</span>
-        <a href={"https://google.com"}>Signout</a>
-      </div>
+      {user && (
+        <div className={classes.discord}>
+          <img src={discord} alt={""} />
+          <span>Welcome back {user.username}!</span>
+          <a href={"/auth/signout"}>Signout</a>
+        </div>
+      )}
     </header>
   );
 };
