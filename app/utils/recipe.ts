@@ -79,52 +79,43 @@ const deepTableComparison = ({
   };
 };
 
-const generateVariations = ({ recipe }: { recipe: Table }): Table[] => {
-  const VERTICAL_SIZE = recipe.length;
-  const HORIZONTAL_SIZE = Math.max(...recipe.map((row) => row.length));
-
-  // We want to generate all possible variations of the recipe.
-  // As if we were moving the recipe around the crafting table.
-  // This is done by creating a new array of arrays with the new recipe.
-  return Array.from({ length: 4 - VERTICAL_SIZE }, (_, i) =>
-    Array.from({ length: 4 - HORIZONTAL_SIZE }, (_, j) => {
-      const currentVariant: Table = [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null],
-      ];
-
-      new Array(VERTICAL_SIZE).fill(null).map((_, k) =>
-        new Array(HORIZONTAL_SIZE).fill(null).map((_, l) => {
-          currentVariant[i + k][j + l] = recipe[k][l];
-        })
-      );
-
-      return currentVariant;
-    })
-  ).flat();
-};
-
 const generateVariationWithReflections = ({
   solution,
 }: {
   solution: Table;
 }): Table[] => {
-  // Minecraft crafting tables have a reflection symmetry.
-  // This means that the recipe can be flipped horizontally.
-  // This is a helper function to generate all possible variations of the recipe.
-  // Including the reflection symmetry.
+  const generateVariations = ({ recipe }: { recipe: Table }): Table[] => {
+    const VERTICAL_SIZE = recipe.length;
+    const HORIZONTAL_SIZE = Math.max(...recipe.map((row) => row.length));
 
-  const variants = generateVariations({
-    recipe: solution,
-  });
+    // We want to generate all possible variations of the recipe.
+    // As if we were moving the recipe around the crafting table.
+    // This is done by creating a new array of arrays with the new recipe.
+    return Array.from({ length: 4 - VERTICAL_SIZE }, (_, i) =>
+      Array.from({ length: 4 - HORIZONTAL_SIZE }, (_, j) => {
+        const currentVariant: Table = [
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ];
 
-  const reversedSolution = solution.map((row) => [...row].reverse());
+        new Array(VERTICAL_SIZE).fill(null).map((_, k) =>
+          new Array(HORIZONTAL_SIZE).fill(null).map((_, l) => {
+            currentVariant[i + k][j + l] = recipe[k][l];
+          })
+        );
 
+        return currentVariant;
+      })
+    ).flat();
+  };
+  
   return [
-    ...variants,
     ...generateVariations({
-      recipe: reversedSolution,
+      recipe: solution,
+    }),
+    ...generateVariations({
+      recipe: solution.map((row) => [...row].reverse()),
     }),
   ];
 };
