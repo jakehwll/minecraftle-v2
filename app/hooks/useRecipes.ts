@@ -1,4 +1,11 @@
-export const useRecipes = () => ({
+export const useRecipes: () => {
+  [key: string]: {
+    type: string;
+    group: string;
+    output: string;
+    input: Array<Array<string | null>>;
+  }
+} = () => ({
   activator_rail: {
     type: "minecraft:crafting_shaped",
     group: "",

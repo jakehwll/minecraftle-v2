@@ -4,6 +4,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 interface GameState {
   date: string;
   setDate: (date: string) => void;
+  recipe: string;
+  setRecipe: (recipe: string) => void;
   craftingTables: Array<Array<Array<string | null>>>;
   setCraftingTables: (
     craftingTables: Array<Array<Array<string | null>>>
@@ -19,6 +21,8 @@ const useGameState = create<GameState>()(
     (set) => ({
       date: "",
       setDate: (date) => set({ date }),
+      recipe: "",
+      setRecipe: (recipe) => set({ recipe }),
       craftingTables: [],
       setCraftingTables: (craftingTables) => set({ craftingTables }),
       inventory: [
