@@ -62,6 +62,11 @@ export default function App() {
   const recipes = useRecipes();
 
   useEffect(() => {
+    useGameState.persist.rehydrate();
+  }, []);
+
+  useEffect(() => {
+    if (!date) return;
     const DATE_STRING = format(new Date(), "yyyy-MM-dd");
     if (DATE_STRING === date) return;
     const daysThisYear = parseInt(
@@ -80,7 +85,7 @@ export default function App() {
       [null, null, null],
     ]);
     setGameState("inProgress");
-  }, []);
+  }, [date]);
 
   return (
     <>

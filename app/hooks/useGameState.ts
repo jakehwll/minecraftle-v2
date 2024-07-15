@@ -37,6 +37,7 @@ const useGameState = create<GameState>()(
     {
       name: "minecraftle-game-state",
       storage: createJSONStorage(() => localStorage),
+      skipHydration: true,
     }
   )
 );
