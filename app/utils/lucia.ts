@@ -3,7 +3,9 @@ import { Lucia, TimeSpan } from "lucia";
 import { prisma } from "./database";
 import { webcrypto } from "node:crypto";
 
-globalThis.crypto = webcrypto as Crypto;
+if ( !globalThis.crypto ) {
+  globalThis.crypto = webcrypto as Crypto;
+}
 
 const adapter = new PrismaAdapter(prisma.session, prisma.user);
 
