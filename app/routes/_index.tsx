@@ -4,7 +4,7 @@ import { CraftingTable } from "../components/CraftingTable";
 import { Game } from "../components/Game";
 import { Inventory } from "../components/Inventory";
 import useGameState from "../hooks/useGameState";
-// import Tooltip from "../components/Tooltip";
+import Tooltip from "../components/Tooltip";
 import Cursor from "../components/Cursor";
 import { useEffect } from "react";
 import useTempState from "../hooks/useTempState";
@@ -19,6 +19,7 @@ import { authLoader } from "~/utils/authLoader.server";
 import { useLoaderData } from "@remix-run/react";
 import { User } from "lucia";
 import { RECIPES } from "~/hooks/useRecipes";
+import useTooltip from "~/hooks/useTooltip";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,6 +32,7 @@ export const loader: LoaderFunction = async ({ request }) =>
   authLoader(request);
 
 export default function App() {
+  const { value: tooltipValue } = useTooltip();
   const { setDragging, currentItem } = useTempState();
   const {
     date,
@@ -89,7 +91,7 @@ export default function App() {
     <>
       <GameOptions />
       <Preloader />
-      {/* {!isMobile && (<Tooltip />)} */}
+      {!isMobile && tooltipValue && (<Tooltip />)}
       {!isMobile && currentItem && <Cursor />}
       <Header user={user.user} />
       <Game>
