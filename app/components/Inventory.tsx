@@ -1,7 +1,7 @@
 import { checkMatchMap, checkRecipe, MatchMapResult } from "../utils/recipe";
 import useGameState from "../hooks/useGameState";
 import { useItems } from "../hooks/useItems";
-import { useRecipes } from "../hooks/useRecipes";
+import { RECIPES } from "../hooks/useRecipes";
 import useTempState from "../hooks/useTempState";
 import { Button } from "./Button";
 import { Container } from "./Container";
@@ -42,10 +42,10 @@ export const Inventory = () => {
   const MAX_GUESSES = 10;
 
   const { recipe } = useGameState();
-  const recipes = useRecipes();
-  const solution = recipes[recipe];
+  const recipes = RECIPES
+  const solution = useMemo(() => recipes[recipe], [recipe, recipes]);
 
-  if ( !solution ) return null
+  if (!solution) return null;
 
   const onSubmit = () => {
     const [recipeResult] = Object.entries(recipes).find(([_, recipeItems]) =>

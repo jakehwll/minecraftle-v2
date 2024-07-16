@@ -4,15 +4,14 @@ import { Crafting } from "./Crafting";
 import { Modal } from "./Modal";
 import classes from "./GameOver.module.css";
 import { useEffect, useState } from "react";
-import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap } from "../utils/recipe";
 import { matchMapToEmoji } from "../utils/emoji";
-import { useTranslation } from "~/hooks/useTranslation";
+import { RECIPES } from "~/hooks/useRecipes";
+import { TRANSLATION } from "~/hooks/useTranslation";
 
 export const GameOver = () => {
   const { gameState, craftingTables } = useGameState();
   const [shared, setShared] = useState(false);
-  const recipes = useRecipes();
   const { recipe } = useGameState();
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export const GameOver = () => {
       ...craftingTables.map((table) => [
         matchMapToEmoji({
           matchMap: checkMatchMap({
-            recipe: recipes[recipe].input,
+            recipe: RECIPES[recipe].input,
             input: table,
           }),
         }),
@@ -35,11 +34,11 @@ export const GameOver = () => {
     setTimeout(() => setShared(false), 3000);
   }, [shared]);
 
-  const solution = recipes[recipe];
+  const solution = RECIPES[recipe];
 
   return (
     <Modal
-      title={`Solution: ${useTranslation(solution.output)}`}
+      title={`Solution: ${TRANSLATION[solution.output]}`}
       content={
         <>
           <div className={classes.crafting}>

@@ -1,11 +1,11 @@
-export const useRecipes: () => {
+export const RECIPES: {
   [key: string]: {
     type: string;
     group: string;
     output: string;
     input: Array<Array<string | null>>;
-  }
-} = () => ({
+  };
+} = {
   activator_rail: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -1143,4 +1143,4 @@ export const useRecipes: () => {
     output: "minecraft:wooden_sword",
     input: [["minecraft:planks"], ["minecraft:planks"], ["minecraft:stick"]],
   },
-});
+};
