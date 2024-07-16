@@ -4,7 +4,7 @@ import { CraftingTable } from "../components/CraftingTable";
 import { Game } from "../components/Game";
 import { Inventory } from "../components/Inventory";
 import useGameState from "../hooks/useGameState";
-import Tooltip from "../components/Tooltip";
+// import Tooltip from "../components/Tooltip";
 import Cursor from "../components/Cursor";
 import { useEffect } from "react";
 import useTempState from "../hooks/useTempState";
@@ -31,7 +31,7 @@ export const loader: LoaderFunction = async ({ request }) =>
   authLoader(request);
 
 export default function App() {
-  const { setDragging } = useTempState();
+  const { setDragging, currentItem } = useTempState();
   const {
     date,
     setRecipe,
@@ -89,12 +89,8 @@ export default function App() {
     <>
       <GameOptions />
       <Preloader />
-      {!isMobile && (
-        <>
-          <Cursor />
-          <Tooltip />
-        </>
-      )}
+      {/* {!isMobile && (<Tooltip />)} */}
+      {!isMobile && currentItem && <Cursor />}
       <Header user={user.user} />
       <Game>
         {craftingTables.map((craftingTable, index) => (
