@@ -8,6 +8,7 @@ import { Container } from "./Container";
 import { Crafting } from "./Crafting";
 import classes from "./Inventory.module.css";
 import { Slot } from "./Slot";
+import { useMemo } from "react";
 
 export const Inventory = () => {
   const items = useItems();
