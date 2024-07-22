@@ -2,10 +2,10 @@ import classes from "./Crafting.module.css";
 import { Slot } from "./Slot";
 import image__arrow from "../assets/arrow.png";
 import image__arrow_disabled from "../assets/arrow_disabled.png";
-import { useRecipes } from "../hooks/useRecipes";
 import { checkMatchMap, checkRecipe } from "../utils/recipe";
 import cc from "classcat";
-import { useTranslation } from "../hooks/useTranslation";
+import { TRANSLATION } from "../hooks/useTranslation";
+import { RECIPES } from "~/hooks/useRecipes";
 
 export const Crafting = ({
   craftingTable,
@@ -22,9 +22,8 @@ export const Crafting = ({
   onSubmit?: () => void;
   disabled?: boolean;
 }) => {
-  const recipes = useRecipes();
 
-  const [recipeResult] = Object.entries(recipes).find(([_, recipeItems]) =>
+  const [recipeResult] = Object.entries(RECIPES).find(([_, recipeItems]) =>
     checkRecipe({
       recipe: recipeItems.input,
       input: craftingTable,
@@ -37,7 +36,7 @@ export const Crafting = ({
         input: craftingTable,
       })
     : null;
-  const translation = useTranslation(`minecraft:${recipeResult}`)
+  const translation = TRANSLATION[`minecraft:${recipeResult}`] ?? ""
 
   return (
     <>

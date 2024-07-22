@@ -1,4 +1,4 @@
-const EN_TRANSLATION: {
+export const TRANSLATION: {
   [key: string]: string;
 } = {
   "minecraft:planks": "Planks",
@@ -132,5 +132,3 @@ const EN_TRANSLATION: {
   "minecraft:wooden_shovel": "Wooden Shovel",
   "minecraft:wooden_sword": "Wooden Sword",
 };
-
-export const useTranslation = (key: string | null) => EN_TRANSLATION[key || "undefined"] || key;

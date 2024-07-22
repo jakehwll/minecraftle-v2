@@ -18,6 +18,7 @@ import { GameOptions } from "../components/GameOptions";
 import { authLoader } from "~/utils/authLoader.server";
 import { useLoaderData } from "@remix-run/react";
 import { User } from "lucia";
+import useTooltip from "~/hooks/useTooltip";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,15 +31,13 @@ export const loader: LoaderFunction = async ({ request }) =>
   authLoader(request);
 
 export default function App() {
-  const { setDragging } = useTempState();
+  const { value: tooltipValue } = useTooltip();
+  const { setDragging, currentItem } = useTempState();
   const {
     date,
-    setCraftingTables,
-    setInventory,
-    setGameState,
-    setDate,
     craftingTables,
     gameState,
+    resetGameState,
   } = useGameState();
   const { isMobile } = useUserAgent();
 
@@ -58,29 +57,21 @@ export default function App() {
   });
 
   useEffect(() => {
-    const DATE_STRING = format(new Date(), "yyyy-MM-dd");
-    if (DATE_STRING === date) return;
-    setDate(DATE_STRING);
-    setGameState("inProgress");
-    setCraftingTables([]);
-    setInventory([
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ]);
-    setGameState("inProgress");
+    useGameState.persist.rehydrate();
   }, []);
+
+  useEffect(() => {
+    if (!date) return;
+    const DATE_STRING = format(new Date(), "yyyy-MM-dd");
+    if (DATE_STRING !== date) resetGameState();
+  }, [date]);
 
   return (
     <>
       <GameOptions />
       <Preloader />
-      {!isMobile && (
-        <>
-          <Cursor />
-          <Tooltip />
-        </>
-      )}
+      {!isMobile && tooltipValue && (<Tooltip />)}
+      {!isMobile && currentItem && <Cursor />}
       <Header user={user.user} />
       <Game>
         {craftingTables.map((craftingTable, index) => (

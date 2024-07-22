@@ -1,4 +1,5 @@
-import { useRecipes } from "../hooks/useRecipes";
+import useGameState from "~/hooks/useGameState";
+import { RECIPES } from "../hooks/useRecipes";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
 
@@ -7,12 +8,15 @@ export const CraftingTable = ({
 }: {
   craftingTable: Array<Array<string | null>>
 }) => {
-  const recipes = useRecipes();
-  const recipe = recipes["campfire"].input;
+  const { recipe } = useGameState();
 
   return (
     <Container>
-      <Crafting recipe={recipe} craftingTable={craftingTable} disabled />
+      <Crafting
+        recipe={RECIPES[recipe].input}
+        craftingTable={craftingTable}
+        disabled
+      />
     </Container>
   );
 };

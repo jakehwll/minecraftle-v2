@@ -24,7 +24,7 @@ const deepTableComparison = ({
   isMatch: boolean;
 } => {
   // Instantiate an empty matchmap with default values
-  let matchMap: MatchMap = Array.from({ length: 3 }, (_, y) =>
+  const matchMap: MatchMap = Array.from({ length: 3 }, (_, y) =>
     Array.from({ length: 3 }, (_, x) => ({
       item: input[y][x],
       result: MatchMapResult.DEFAULT
@@ -79,52 +79,43 @@ const deepTableComparison = ({
   };
 };
 
-const generateVariations = ({ recipe }: { recipe: Table }): Table[] => {
-  const VERTICAL_SIZE = recipe.length;
-  const HORIZONTAL_SIZE = Math.max(...recipe.map((row) => row.length));
-
-  // We want to generate all possible variations of the recipe.
-  // As if we were moving the recipe around the crafting table.
-  // This is done by creating a new array of arrays with the new recipe.
-  return Array.from({ length: 4 - VERTICAL_SIZE }, (_, i) =>
-    Array.from({ length: 4 - HORIZONTAL_SIZE }, (_, j) => {
-      let currentVariant: Table = [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null],
-      ];
-
-      new Array(VERTICAL_SIZE).fill(null).map((_, k) =>
-        new Array(HORIZONTAL_SIZE).fill(null).map((_, l) => {
-          currentVariant[i + k][j + l] = recipe[k][l];
-        })
-      );
-
-      return currentVariant;
-    })
-  ).flat();
-};
-
 const generateVariationWithReflections = ({
   solution,
 }: {
   solution: Table;
 }): Table[] => {
-  // Minecraft crafting tables have a reflection symmetry.
-  // This means that the recipe can be flipped horizontally.
-  // This is a helper function to generate all possible variations of the recipe.
-  // Including the reflection symmetry.
+  const generateVariations = ({ recipe }: { recipe: Table }): Table[] => {
+    const VERTICAL_SIZE = recipe.length;
+    const HORIZONTAL_SIZE = Math.max(...recipe.map((row) => row.length));
 
-  let variants = generateVariations({
-    recipe: solution,
-  });
+    // We want to generate all possible variations of the recipe.
+    // As if we were moving the recipe around the crafting table.
+    // This is done by creating a new array of arrays with the new recipe.
+    return Array.from({ length: 4 - VERTICAL_SIZE }, (_, i) =>
+      Array.from({ length: 4 - HORIZONTAL_SIZE }, (_, j) => {
+        const currentVariant: Table = [
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ];
 
-  const reversedSolution = solution.map((row) => [...row].reverse());
+        new Array(VERTICAL_SIZE).fill(null).map((_, k) =>
+          new Array(HORIZONTAL_SIZE).fill(null).map((_, l) => {
+            currentVariant[i + k][j + l] = recipe[k][l];
+          })
+        );
 
+        return currentVariant;
+      })
+    ).flat();
+  };
+  
   return [
-    ...variants,
     ...generateVariations({
-      recipe: reversedSolution,
+      recipe: solution,
+    }),
+    ...generateVariations({
+      recipe: solution.map((row) => [...row].reverse()),
     }),
   ];
 };
@@ -138,7 +129,7 @@ const matchMapWithWrongSlots = ({
   input: Table;
   correctSlots: MatchMap;
 }) => {
-  let n_items: { [key: string]: number } = {};
+  const n_items: { [key: string]: number } = {};
 
   // first pass initiliases all item dict entries to 0
   for (let i = 0; i < 3; i++) {
@@ -167,7 +158,7 @@ const matchMapWithWrongSlots = ({
   }
 
   // finds how many of each item are left to be identified
-  let n_unidentified_items = recipe.reduce(
+  const n_unidentified_items = recipe.reduce(
     (acc: { [key: string]: number }, row) => {
       row.forEach((item) => {
         if (item !== null && item !== undefined) {
@@ -182,7 +173,7 @@ const matchMapWithWrongSlots = ({
     },
     {}
   );
-  for (let name of Object.keys(n_unidentified_items)) {
+  for (const name of Object.keys(n_unidentified_items)) {
     n_unidentified_items[name] -= n_items[name];
   }
 
