@@ -19,6 +19,7 @@ import { authLoader } from "~/utils/authLoader.server";
 import { useLoaderData } from "@remix-run/react";
 import { User } from "lucia";
 import useTooltip from "~/hooks/useTooltip";
+import { trpc } from "~/utils/trpc";
 
 export const meta: MetaFunction = () => {
   return [
@@ -66,10 +67,13 @@ export default function App() {
     if (DATE_STRING !== date) resetGameState();
   }, [date]);
 
+  const { data: debug } = trpc.debug.useQuery()
+
   return (
     <>
       <GameOptions />
       <Preloader />
+      <p>{debug}</p>
       {!isMobile && tooltipValue && (<Tooltip />)}
       {!isMobile && currentItem && <Cursor />}
       <Header user={user.user} />
