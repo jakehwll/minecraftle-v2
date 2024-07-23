@@ -18,7 +18,6 @@ import { GameOptions } from "../components/GameOptions";
 import { authLoader } from "~/utils/authLoader.server";
 import { useLoaderData } from "@remix-run/react";
 import { User } from "lucia";
-import { RECIPES } from "~/hooks/useRecipes";
 import useTooltip from "~/hooks/useTooltip";
 
 export const meta: MetaFunction = () => {
@@ -36,13 +35,9 @@ export default function App() {
   const { setDragging, currentItem } = useTempState();
   const {
     date,
-    setRecipe,
-    setCraftingTables,
-    setInventory,
-    setGameState,
-    setDate,
     craftingTables,
     gameState,
+    resetGameState,
   } = useGameState();
   const { isMobile } = useUserAgent();
 
@@ -68,23 +63,7 @@ export default function App() {
   useEffect(() => {
     if (!date) return;
     const DATE_STRING = format(new Date(), "yyyy-MM-dd");
-    if (DATE_STRING === date) return;
-    const daysThisYear = parseInt(
-      format(new Date(), "D", {
-        useAdditionalDayOfYearTokens: true,
-      })
-    );
-    const recipeKeys = Object.keys(RECIPES);
-    setRecipe(recipeKeys[daysThisYear % recipeKeys.length]);
-    setDate(DATE_STRING);
-    setGameState("inProgress");
-    setCraftingTables([]);
-    setInventory([
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ]);
-    setGameState("inProgress");
+    if (DATE_STRING !== date) resetGameState();
   }, [date]);
 
   return (
