@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://minecraftle2.vercel.app">
-    <img src="./app/assets/logo.webp" style="width: 256px">
+    <img src="./.github/assets/logo.webp" style="width: 256px">
   </a>
 
   <h1>
@@ -19,7 +19,7 @@
 Everytime you submit an answer your shown the items in their correct spots (marked in green), items that are apart of the recipe (marked in orange) and if the item doesn't appear in the recipe it stays greyed out.
 
 <p align="center">
-  <img src="./app/assets/hero-image.png">
+  <img src="./.github/assets/hero-image.png">
 </p>
 
 ## Quickstart
