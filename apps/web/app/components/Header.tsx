@@ -13,6 +13,7 @@ export const Header = () => {
 
   return (
     <header className={classes.root}>
+      <p>{process.env.VERCEL_URL}</p>
       <a href={"/"} className={classes.logo}>
         <img src={logo} className={classes.logo__image} alt={""} />
         <span className={classes.logo__text}>New & Improved!</span>
