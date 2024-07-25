@@ -5,15 +5,14 @@ import { Button, ButtonLink } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
 import { Form, useLoaderData } from "@remix-run/react";
-import { authLoader } from "~/utils/authLoader.server";
+import { contextLoader } from "~/utils/contextLoader.server";
 
 export const Header = () => {
-  const { backend, user } = useLoaderData<typeof authLoader>();
+  const { user } = useLoaderData<typeof contextLoader>();
   const { guiScale, setGuiScale } = useGameOptions();
 
   return (
     <header className={classes.root}>
-      <p>{backend}</p>
       <a href={"/"} className={classes.logo}>
         <img src={logo} className={classes.logo__image} alt={""} />
         <span className={classes.logo__text}>New & Improved!</span>

@@ -12,9 +12,11 @@ import { Footer } from "../components/Footer";
 import { useUserAgent } from "../hooks/useUserAgent";
 import { format } from "date-fns";
 import { Header } from "../components/Header";
-import { authLoader } from "~/utils/authLoader.server";
 import useTooltip from "~/hooks/useTooltip";
-// import { trpc } from "~/utils/trpc";
+import { contextLoader } from "~/utils/contextLoader.server";
+
+export const loader: LoaderFunction = async ({ request }) =>
+  contextLoader(request);
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,9 +24,6 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Wordle with a Minecraft Twist!" },
   ];
 };
-
-export const loader: LoaderFunction = async ({ request }) =>
-  authLoader(request);
 
 export default function Page() {
   const { value: tooltipValue } = useTooltip();

@@ -1,6 +1,6 @@
 import { lucia } from "./lucia";
 
-export const authLoader = async (req: Request) => {
+export const contextLoader = async (req: Request) => {
   const cookie = req.headers.get("Cookie");
   const sessionId = cookie ? lucia.readSessionCookie(cookie) : null;
   const session = sessionId ? await lucia.validateSession(sessionId) : null;
