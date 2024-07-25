@@ -4,10 +4,11 @@ import discord from "../assets/discord.svg";
 import { Button, ButtonLink } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
-import { User } from "lucia";
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
+import { authLoader } from "~/utils/authLoader.server";
 
-export const Header = ({ user }: { user: User | null }) => {
+export const Header = () => {
+  const { user } = useLoaderData<typeof authLoader>();
   const { guiScale, setGuiScale } = useGameOptions();
 
   return (

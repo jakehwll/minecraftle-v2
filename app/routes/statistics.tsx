@@ -9,11 +9,9 @@ export const loader: LoaderFunction = async ({ request }) =>
   authLoader(request);
 
 export default function Page() {
-  const user = useLoaderData<typeof loader>();
-
   return (
     <>
-      <Header user={user.user} />
+      <Header />
       <Statistics />
       <Footer />
     </>
