@@ -3,6 +3,7 @@ import { procedure, router } from "../trpc";
 import { prisma } from "~/utils/database";
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
+import { format } from "date-fns";
 
 const counterHelperArgs = ({
   userId,
@@ -65,9 +66,11 @@ export const game = router({
         })
       }
 
-      await prisma.game.create({
-        data: {
-          date: new Date(),
+      const GAME_DATE = new Date(format(new Date(), "yyyy-MM-dd")).toISOString();
+
+      await prisma.game.upsert({
+        create: {
+          date: GAME_DATE,
           user: {
             connect: {
               id: ctx.user.id,
@@ -75,6 +78,15 @@ export const game = router({
           },
           guesses: input.guesses,
         },
+        update: {
+          guesses: input.guesses,
+        },
+        where: {
+          date_userId: {
+            date: GAME_DATE,
+            userId: ctx.user.id,
+          }
+        }
       });
 
       return {
