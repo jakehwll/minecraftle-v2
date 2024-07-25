@@ -12,11 +12,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.message {
-  background-color: #232324;
-  outline: 2px black solid;
-  border: 2px #313233 solid;
-  padding: 8px 16px;
-  font-size: 18px;
-}

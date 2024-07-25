@@ -1,9 +1,8 @@
-import { procedure, router } from "./trpc";
+import { game } from "./routers/game";
+import { router } from "./trpc";
 
 export const appRouter = router({
-  debug: procedure.query(() => {
-    return "Hello World one two three";
-  })
+  game
 });
 
 export type AppRouter = typeof appRouter;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./Preloader.module.css";
+import { Loading } from "./Loading";
 
 const ASSETS_TO_PRELOAD = [
   "background-button.png",
@@ -33,7 +34,7 @@ export const Preloader = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.message}>Loading...</div>
+      <Loading />
     </div>
   );
 };
