@@ -7,5 +7,6 @@ export const authLoader = async (req: Request) => {
 
   return {
     user: session?.user,
+    backend: process.env.VERCEL_URL ?? "http://localhost:5173",
   };
 };

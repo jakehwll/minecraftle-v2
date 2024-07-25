@@ -4,24 +4,26 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
-import { trpc } from "./utils/trpc";
 import "./app.css";
 import { GameOptions } from "./components/GameOptions";
 import { Preloader } from "./components/Preloader";
+import { authLoader } from "./utils/authLoader.server";
+import { trpc } from "./utils/trpc";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const BATCH_LINK = process.env.VERCEL_URL ?? "http://localhost:5173";
+  const { backend } = useLoaderData<typeof authLoader>();
 
   const [ queryClient ] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: BATCH_LINK,
+          url: backend,
         }),
       ],
     })

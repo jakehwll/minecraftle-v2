@@ -8,12 +8,12 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { authLoader } from "~/utils/authLoader.server";
 
 export const Header = () => {
-  const { user } = useLoaderData<typeof authLoader>();
+  const { backend, user } = useLoaderData<typeof authLoader>();
   const { guiScale, setGuiScale } = useGameOptions();
 
   return (
     <header className={classes.root}>
-      <p>{process.env.VERCEL_URL}</p>
+      <p>{backend}</p>
       <a href={"/"} className={classes.logo}>
         <img src={logo} className={classes.logo__image} alt={""} />
         <span className={classes.logo__text}>New & Improved!</span>
