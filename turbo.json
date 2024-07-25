@@ -1,5 +1,8 @@
 {
     "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": [
+        ".env"
+    ],
     "tasks": {
         "build": {
             "outputs": [
@@ -7,6 +10,10 @@
             ]
         },
         "dev": {
+            "persistent": true,
+            "cache": false
+        },
+        "env": {
             "persistent": true,
             "cache": false
         }

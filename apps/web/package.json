@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "prisma generate && remix vite:build",
-    "dev": "remix vite:dev",
+    "dev": "bun --env-file=../../.env remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "env": "bun --env-file=.env --print process.env"
   },
   "dependencies": {
     "@lucia-auth/adapter-prisma": "^4.0.1",
