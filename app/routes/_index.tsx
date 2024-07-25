@@ -1,5 +1,4 @@
 import { type LoaderFunction, type MetaFunction } from "@remix-run/node";
-import "../app.css";
 import { CraftingTable } from "../components/CraftingTable";
 import { Game } from "../components/Game";
 import { Inventory } from "../components/Inventory";
@@ -13,12 +12,10 @@ import { Footer } from "../components/Footer";
 import { useUserAgent } from "../hooks/useUserAgent";
 import { format } from "date-fns";
 import { Header } from "../components/Header";
-import { Preloader } from "../components/Preloader";
-import { GameOptions } from "../components/GameOptions";
 import { authLoader } from "~/utils/authLoader.server";
 import { useLoaderData } from "@remix-run/react";
-import { User } from "lucia";
 import useTooltip from "~/hooks/useTooltip";
+// import { trpc } from "~/utils/trpc";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,7 +27,7 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async ({ request }) =>
   authLoader(request);
 
-export default function App() {
+export default function Page() {
   const { value: tooltipValue } = useTooltip();
   const { setDragging, currentItem } = useTempState();
   const {
@@ -41,9 +38,7 @@ export default function App() {
   } = useGameState();
   const { isMobile } = useUserAgent();
 
-  const user = useLoaderData<{
-    user: User | null;
-  }>();
+  const user = useLoaderData<typeof loader>();
 
   useEffect(() => {
     const onMouseDown = (event: MouseEvent) => setDragging(event.button === 2);
@@ -68,8 +63,6 @@ export default function App() {
 
   return (
     <>
-      <GameOptions />
-      <Preloader />
       {!isMobile && tooltipValue && (<Tooltip />)}
       {!isMobile && currentItem && <Cursor />}
       <Header user={user.user} />

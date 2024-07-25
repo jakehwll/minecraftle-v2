@@ -9,6 +9,7 @@ import { Crafting } from "./Crafting";
 import classes from "./Inventory.module.css";
 import { Slot } from "./Slot";
 import { useMemo } from "react";
+import { trpc } from "~/utils/trpc";
 
 export const Inventory = () => {
   const items = useItems();
@@ -45,6 +46,7 @@ export const Inventory = () => {
   const { recipe } = useGameState();
   const recipes = RECIPES
   const solution = useMemo(() => recipes[recipe], [recipe, recipes]);
+  const { mutate } = trpc.game.create.useMutation();
 
   if (!solution) return null;
 
@@ -67,11 +69,17 @@ export const Inventory = () => {
 
     if (craftingTables.length >= MAX_GUESSES - 1) {
       setGameState("lost");
+      mutate({
+        guesses: craftingTables.length + 1,
+      });
       return;
     } else {
       // If we have a recipe result, we check if it matches the solution.
       if (`minecraft:${recipeResult}` === solution.output) {
         setGameState("won");
+        mutate({
+          guesses: craftingTables.length + 1
+        })
       }
     }
   };

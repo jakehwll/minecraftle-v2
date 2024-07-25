@@ -1,5 +1,5 @@
 import useGameState from "../hooks/useGameState";
-import { Button } from "./Button";
+import { Button, ButtonLink } from "./Button";
 import { Crafting } from "./Crafting";
 import { Modal } from "./Modal";
 import classes from "./GameOver.module.css";
@@ -54,9 +54,12 @@ export const GameOver = () => {
                 }.`
               : "You've run out of guesses!"}
           </p>
-          <Button className={classes.button} onClick={() => setShared(true)}>
-            {shared ? "Copied!" : "Share"}
+          <Button fullWidth onClick={() => setShared(true)}>
+            {shared ? "Copied!" : "Copy Results"}
           </Button>
+          <ButtonLink href={"/statistics"} fullWidth>
+            View Statistics
+          </ButtonLink>
         </>
       }
       props={{
