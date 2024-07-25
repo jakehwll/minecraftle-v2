@@ -48,7 +48,7 @@ export default function App() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: backend,
+          url: `${backend}/trpc`,
         }),
       ],
     })
