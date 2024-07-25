@@ -25,9 +25,9 @@ model Session {
 }
 
 model Game {
-  date   DateTime
+  date    DateTime
   guesses Int
-  userId String
+  userId  String
 
   user User @relation(fields: [userId], references: [id])
 
