@@ -83,11 +83,19 @@ export const game = router({
     }),
   read: procedure.query(async () => {
     const USER_ID = "";
+
     const [totalGames, wonGames, lostGames] = await prisma.$transaction([
       _totalGames(USER_ID),
       _wonGames(USER_ID),
       _lostGames(USER_ID),
     ]);
+
+    if ( !totalGames || !wonGames || !lostGames ) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Statistics not found",
+      })
+    }
 
     return {
       totalGames,

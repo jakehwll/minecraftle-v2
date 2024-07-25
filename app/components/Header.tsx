@@ -1,7 +1,7 @@
 import classes from "./Header.module.css";
 import logo from "../assets/logo.webp";
 import discord from "../assets/discord.svg";
-import { Button } from "./Button";
+import { Button, ButtonLink } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
 import { User } from "lucia";
@@ -12,10 +12,10 @@ export const Header = ({ user }: { user: User | null }) => {
 
   return (
     <header className={classes.root}>
-      <div className={classes.logo}>
+      <a href={"/"} className={classes.logo}>
         <img src={logo} className={classes.logo__image} alt={""} />
         <span className={classes.logo__text}>New & Improved!</span>
-      </div>
+      </a>
       <div className={classes.grid}>
         <Modal
           title={"How to Play"}
@@ -82,7 +82,7 @@ export const Header = ({ user }: { user: User | null }) => {
         >
           <Button>Account</Button>
         </Modal>
-        <Button>Statistics</Button>
+        <ButtonLink href={"/statistics"}>Statistics</ButtonLink>
       </div>
       {user && (
         <div className={classes.discord}>

@@ -3,6 +3,11 @@
   border: none;
   font: inherit;
   cursor: pointer;
+
+  display: block;
+  text-decoration: none;
+  text-align: center;
+
   line-height: 1;
 
   background-image: url("/background-button.png");
