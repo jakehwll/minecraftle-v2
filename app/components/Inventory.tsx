@@ -69,6 +69,9 @@ export const Inventory = () => {
 
     if (craftingTables.length >= MAX_GUESSES - 1) {
       setGameState("lost");
+      mutate({
+        guesses: craftingTables.length + 1,
+      });
       return;
     } else {
       // If we have a recipe result, we check if it matches the solution.
