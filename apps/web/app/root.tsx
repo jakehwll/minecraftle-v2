@@ -14,12 +14,14 @@ import { GameOptions } from "./components/GameOptions";
 import { Preloader } from "./components/Preloader";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const BATCH_LINK = process.env.VERCEL_URL ?? "http://localhost:5173";
+
   const [ queryClient ] = useState(() => new QueryClient());
-  const [ trpcClient ] = useState(() =>
+  const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:5173/trpc",
+          url: BATCH_LINK,
         }),
       ],
     })
