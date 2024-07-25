@@ -13,7 +13,6 @@ import { useUserAgent } from "../hooks/useUserAgent";
 import { format } from "date-fns";
 import { Header } from "../components/Header";
 import { authLoader } from "~/utils/authLoader.server";
-import { useLoaderData } from "@remix-run/react";
 import useTooltip from "~/hooks/useTooltip";
 // import { trpc } from "~/utils/trpc";
 
@@ -37,8 +36,6 @@ export default function Page() {
     resetGameState,
   } = useGameState();
   const { isMobile } = useUserAgent();
-
-  const user = useLoaderData<typeof loader>();
 
   useEffect(() => {
     const onMouseDown = (event: MouseEvent) => setDragging(event.button === 2);
@@ -65,7 +62,7 @@ export default function Page() {
     <>
       {!isMobile && tooltipValue && (<Tooltip />)}
       {!isMobile && currentItem && <Cursor />}
-      <Header user={user.user} />
+      <Header />
       <Game>
         {craftingTables.map((craftingTable, index) => (
           <CraftingTable craftingTable={craftingTable} key={index} />
