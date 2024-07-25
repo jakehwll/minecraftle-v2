@@ -4,29 +4,23 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
+  // useLoaderData,
 } from "@remix-run/react";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
-import { trpc } from "./utils/trpc";
 import "./app.css";
 import { GameOptions } from "./components/GameOptions";
 import { Preloader } from "./components/Preloader";
+import { contextLoader } from "./utils/contextLoader.server";
+import { trpc } from "./utils/trpc";
+import { LoaderFunction } from "@remix-run/node";
+
+export const loader: LoaderFunction = async ({ request }) =>
+  contextLoader(request);
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const BATCH_LINK = process.env.VERCEL_URL ?? "http://localhost:5173";
-
-  const [ queryClient ] = useState(() => new QueryClient());
-  const [trpcClient] = useState(() =>
-    trpc.createClient({
-      links: [
-        httpBatchLink({
-          url: BATCH_LINK,
-        }),
-      ],
-    })
-  );
-  
   return (
     <html lang="en">
       <head>
@@ -38,11 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <Preloader />
         <GameOptions />
-        <trpc.Provider client={trpcClient} queryClient={queryClient}>
-          <QueryClientProvider client={queryClient}>
-            <div id={"app"}>{children}</div>
-          </QueryClientProvider>
-        </trpc.Provider>
+        <div id={"app"}>{children}</div>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -51,5 +41,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const { backend } = useLoaderData<typeof contextLoader>();
+
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        httpBatchLink({
+          url: `${
+            process.env.NODE_ENV === "development" ? `http://` : `https://`
+          }${backend}/trpc`,
+        }),
+      ],
+    })
+  );
+
+  return (
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
+    </trpc.Provider>
+  );
 }

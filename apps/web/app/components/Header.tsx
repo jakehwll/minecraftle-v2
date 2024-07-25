@@ -5,10 +5,10 @@ import { Button, ButtonLink } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
 import { Form, useLoaderData } from "@remix-run/react";
-import { authLoader } from "~/utils/authLoader.server";
+import { contextLoader } from "~/utils/contextLoader.server";
 
 export const Header = () => {
-  const { user } = useLoaderData<typeof authLoader>();
+  const { user } = useLoaderData<typeof contextLoader>();
   const { guiScale, setGuiScale } = useGameOptions();
 
   return (
