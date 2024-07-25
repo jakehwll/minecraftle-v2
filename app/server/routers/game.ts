@@ -81,21 +81,19 @@ export const game = router({
         success: true,
       };
     }),
-  read: procedure.query(async () => {
-    const USER_ID = "";
+  read: procedure.query(async ({ ctx }) => {
+    if (!ctx.user?.id) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to play a game",
+      });
+    }
 
     const [totalGames, wonGames, lostGames] = await prisma.$transaction([
-      _totalGames(USER_ID),
-      _wonGames(USER_ID),
-      _lostGames(USER_ID),
+      _totalGames(ctx.user.id),
+      _wonGames(ctx.user.id),
+      _lostGames(ctx.user.id),
     ]);
-
-    if ( !totalGames || !wonGames || !lostGames ) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: "Statistics not found",
-      })
-    }
 
     return {
       totalGames,
