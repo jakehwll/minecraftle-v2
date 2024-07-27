@@ -4,59 +4,23 @@ import { logger } from "hono/logger";
 import {
   InteractionType,
   InteractionResponseType,
-  type APIInteractionResponse,
-  type APIMessageComponentInteraction,
 } from "discord-api-types/v10";
-import { prisma } from "./utils/database";
 import { _totalGames, _wonGames, _lostGames } from "./utils/statistics";
+import { Interaction } from "./helpers/interaction";
+import { Command } from "./helpers/command";
+import { prisma } from "./utils/database";
 
 const app = new Hono();
 
 app.use("*", logger());
 app.use("*", discordInteraction);
 
-declare global {
-  var hot: boolean;
-}
+const interaction = new Interaction();
 
-class Command {
-  name: string;
-  description: string;
-  type?: null;
-  callback: (
-    args: APIMessageComponentInteraction
-  ) => Promise<APIInteractionResponse>;
-
-  constructor({
-    name,
-    description,
-    type,
-    callback,
-  }: {
-    name: string;
-    description: string;
-    type?: null;
-    callback: (
-      args: APIMessageComponentInteraction
-    ) => Promise<APIInteractionResponse>;
-  }) {
-    this.name = name;
-    this.description = description;
-    this.type = type;
-    this.callback = callback;
-  }
-}
-
-const COMMANDS: {
-  name: string;
-  description: string;
-  callback: (
-    args: APIMessageComponentInteraction
-  ) => Promise<APIInteractionResponse>;
-}[] = [
+interaction.push(
   new Command({
     name: "stats",
-    description: "Replies with pong!",
+    description: "Checks your Minecraftle statistics!",
     callback: async ({ member }) => {
       if (!member || !member.user) {
         return {
@@ -96,52 +60,14 @@ const COMMANDS: {
                   value: `\`${lostGames}\``,
                   inline: true,
                 },
-              ]
+              ],
             },
           ],
         },
       };
     },
-  }),
-];
-
-const DEVELOPMENT_GUILD_ID = process.env.DISCORD_AUTH_BOT_GUILD_ID;
-
-const COMMANDS_ENDPOINT = {
-  local: `https://discord.com/api/v10/applications/${process.env.DISCORD_AUTH_CLIENT_ID}/guilds/${DEVELOPMENT_GUILD_ID}/commands`,
-  global: `https://discord.com/api/v10/applications/${process.env.DISCORD_AUTH_CLIENT_ID}/commands`,
-};
-
-const UPLOAD_COMMANDS = async () => {
-  await fetch(
-    process.env.NODE_ENV === "development"
-      ? COMMANDS_ENDPOINT.local
-      : COMMANDS_ENDPOINT.global,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bot ${process.env.DISCORD_AUTH_BOT_TOKEN}`,
-      },
-      method: "PUT",
-      body: JSON.stringify(
-        COMMANDS.map(({ callback, ...rest }) => ({ ...rest }))
-      ),
-    }
-  ).then((res) => {
-    res.status === 200
-      ? console.log("Commands uploaded!", process.env.NODE_ENV)
-      : console.log(
-          "Error uploading commands!",
-          res.status,
-          process.env.NODE_ENV
-        );
-  });
-};
-
-if (!globalThis.hot) {
-  globalThis.hot ??= true;
-  await UPLOAD_COMMANDS();
-}
+  })
+);
 
 app.post("/interaction", async (c) => {
   const message = await c.req.json();
@@ -153,9 +79,9 @@ app.post("/interaction", async (c) => {
   }
 
   if (message.type === InteractionType.ApplicationCommand) {
-    const command = COMMANDS.find(
+    const command = interaction.commands.find(
       (command) => command.name === message.data.name
-    )
+    );
     const res = await command?.callback(message);
 
     if (res) {
@@ -165,6 +91,16 @@ app.post("/interaction", async (c) => {
     }
   }
 });
+
+
+declare global {
+  var hot: boolean;
+}
+
+if (!global.hot) {
+  global.hot = true;
+  await interaction.upload()
+}
 
 export default {
   port: process.env.PORT || 3000,
