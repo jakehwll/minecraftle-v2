@@ -4,8 +4,11 @@ import { logger } from "hono/logger";
 import {
   InteractionType,
   InteractionResponseType,
-  type APIInteractionResponseChannelMessageWithSource,
+  type APIInteractionResponse,
+  type APIMessageComponentInteraction,
 } from "discord-api-types/v10";
+import { prisma } from "./utils/database";
+import { _totalGames, _wonGames, _lostGames } from "./utils/statistics";
 
 const app = new Hono();
 
@@ -16,27 +19,103 @@ declare global {
   var hot: boolean;
 }
 
+class Command {
+  name: string;
+  description: string;
+  type?: null;
+  callback: (
+    args: APIMessageComponentInteraction
+  ) => Promise<APIInteractionResponse>;
+
+  constructor({
+    name,
+    description,
+    type,
+    callback,
+  }: {
+    name: string;
+    description: string;
+    type?: null;
+    callback: (
+      args: APIMessageComponentInteraction
+    ) => Promise<APIInteractionResponse>;
+  }) {
+    this.name = name;
+    this.description = description;
+    this.type = type;
+    this.callback = callback;
+  }
+}
+
 const COMMANDS: {
   name: string;
   description: string;
-  callback: () => void;
+  callback: (
+    args: APIMessageComponentInteraction
+  ) => Promise<APIInteractionResponse>;
 }[] = [
-  {
+  new Command({
     name: "help",
     description: "Replies with some help!",
-    callback: () => {
-      console.log("help");
+    callback: async () => {
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: "TODO :)",
+        },
+      };
     },
-  },
+  }),
+  new Command({
+    name: "stats",
+    description: "Replies with pong!",
+    callback: async ({ member }) => {
+      if (!member || !member.user) {
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: `Something went wrong!`,
+          },
+        };
+      }
+
+      const [totalGames, wonGames, lostGames] = await prisma.$transaction([
+        _totalGames(member.user.id),
+        _wonGames(member.user.id),
+        _lostGames(member.user.id),
+      ]);
+
+      if ( !totalGames || !wonGames || !lostGames ) {
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: `Something went wrong!`,
+          }
+        }
+      }
+
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: `Loading statics for \`${member.user.username}\`.`,
+        },
+      }
+    },
+  }),
 ];
 
 const DEVELOPMENT_GUILD_ID = process.env.DISCORD_AUTH_BOT_GUILD_ID;
-const LOCAL_COMMANDS = `https://discord.com/api/v9/applications/${process.env.DISCORD_AUTH_CLIENT_ID}/guilds/${DEVELOPMENT_GUILD_ID}/commands`;
-const GLOBAL_COMMANDS = `https://discord.com/api/v9/applications/${process.env.DISCORD_AUTH_CLIENT_ID}/commands`;
+
+const COMMANDS_ENDPOINT = {
+  local: `https://discord.com/api/v10/applications/${process.env.DISCORD_AUTH_CLIENT_ID}/guilds/${DEVELOPMENT_GUILD_ID}/commands`,
+  global: `https://discord.com/api/v10/applications/${process.env.DISCORD_AUTH_CLIENT_ID}/commands`,
+};
 
 const UPLOAD_COMMANDS = async () => {
   await fetch(
-    process.env.NODE_ENV === "development" ? LOCAL_COMMANDS : GLOBAL_COMMANDS,
+    process.env.NODE_ENV === "development"
+      ? COMMANDS_ENDPOINT.local
+      : COMMANDS_ENDPOINT.global,
     {
       headers: {
         "Content-Type": "application/json",
@@ -70,17 +149,19 @@ app.post("/interaction", async (c) => {
     return c.json({
       type: InteractionResponseType.Pong,
     });
-  } else {
-    const response: APIInteractionResponseChannelMessageWithSource = {
-      type: InteractionResponseType.ChannelMessageWithSource,
-      data: {
-        tts: false,
-        content: "Hello, world!",
-        embeds: [],
-        allowed_mentions: { parse: [] },
-      },
-    };
-    return c.json(response);
+  }
+
+  if (message.type === InteractionType.ApplicationCommand) {
+    const command = COMMANDS.find(
+      (command) => command.name === message.data.name
+    )
+    const res = await command?.callback(message);
+
+    if (res) {
+      return c.json(res);
+    } else {
+      return c.json({ error: "Command not found" }, 404);
+    }
   }
 });
 

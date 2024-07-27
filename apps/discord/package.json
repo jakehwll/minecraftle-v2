@@ -7,6 +7,9 @@
     "dev": "bun --env-file=../../.env --hot run index.ts",
     "start": "bun --env-file=../../.env run index.ts"
   },
+  "prisma": {
+    "schema": "../../prisma/schema.prisma"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
