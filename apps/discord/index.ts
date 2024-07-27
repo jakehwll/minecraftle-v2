@@ -85,21 +85,34 @@ const COMMANDS: {
         _lostGames(member.user.id),
       ]);
 
-      if ( !totalGames || !wonGames || !lostGames ) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: `Something went wrong!`,
-          }
-        }
-      }
-
       return {
         type: InteractionResponseType.ChannelMessageWithSource,
         data: {
-          content: `Loading statics for \`${member.user.username}\`.`,
+          content: `\`${member.user.username}\`.`,
+          embeds: [
+            {
+              title: "Statistics",
+              fields: [
+                {
+                  name: "Total games",
+                  value: `\`${totalGames}\``,
+                  inline: true,
+                },
+                {
+                  name: "Won games",
+                  value: `\`${wonGames}\``,
+                  inline: true,
+                },
+                {
+                  name: "Lost games",
+                  value: `\`${lostGames}\``,
+                  inline: true,
+                },
+              ]
+            },
+          ],
         },
-      }
+      };
     },
   }),
 ];
