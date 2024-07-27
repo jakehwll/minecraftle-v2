@@ -55,18 +55,6 @@ const COMMANDS: {
   ) => Promise<APIInteractionResponse>;
 }[] = [
   new Command({
-    name: "help",
-    description: "Replies with some help!",
-    callback: async () => {
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: "TODO :)",
-        },
-      };
-    },
-  }),
-  new Command({
     name: "stats",
     description: "Replies with pong!",
     callback: async ({ member }) => {
