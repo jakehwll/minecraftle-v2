@@ -21,8 +21,8 @@ export const Slot = ({
       className={cc([
         classes.root,
         {
-          [classes.slot__correct]: status === MatchMapResult.CORRECT,
-          [classes.slot__orange]: status === MatchMapResult.ORANGE,
+          [classes.slot__good]: status === MatchMapResult.GOOD,
+          [classes.slot__nearly]: status === MatchMapResult.NEARLY,
           [classes.slot__unused]: status === MatchMapResult.UNUSED,
           [classes.slot__disabled]: disabled,
         },

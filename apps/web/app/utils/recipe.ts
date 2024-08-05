@@ -1,16 +1,18 @@
 export enum MatchMapResult {
-  DEFAULT = "Default",
-  CORRECT = "Correct",
-  WRONG = "Wrong",
-  ORANGE = "Orange",
-  UNUSED = "Unused",
+  NULL = "null",
+  GOOD = "correct",
+  NEARLY = "orange",
+  BAD = "bad",
+  UNUSED = "unused",
 }
 
-export type MatchMap = Array<Array<{
-  item: string | null;
-  result: MatchMapResult;
-}>>;
-export type Table = Array<Array<string | null>>;
+export type MatchMap = Array<
+  Array<{
+    item: string | null;
+    result: MatchMapResult;
+  }>
+>;
+export type Table = (string | null)[][];
 
 const deepTableComparison = ({
   recipe,
@@ -23,54 +25,34 @@ const deepTableComparison = ({
   matchCount: number;
   isMatch: boolean;
 } => {
-  // Instantiate an empty matchmap with default values
-  const matchMap: MatchMap = Array.from({ length: 3 }, (_, y) =>
-    Array.from({ length: 3 }, (_, x) => ({
-      item: input[y][x],
-      result: MatchMapResult.DEFAULT
-    }))
-  );
-
-  // Get the size of the recipe, this varies between 1x1 and 3x3.
   const VERTICAL_SIZE = recipe.length;
   const HORIZONTAL_SIZE = Math.max(...recipe.map((row) => row.length));
 
-  // By default, the recipe and input are considered a match
-  // If any item does not match, this will be set to false
   let isMatch = true;
+  const matchMap: MatchMap = Array.from({ length: VERTICAL_SIZE }, (_, y) =>
+    Array.from({ length: HORIZONTAL_SIZE }, (_, x) => {
+      const recipeItem = recipe[y]?.[x] ?? null;
+      const inputItem = input[y]?.[x] ?? null;
 
-  // Iterate over the recipe and input arrays
-  // If the item in the recipe and isn't air, set to default.
-  // If the item in the recipe and input match, set to correct.
-  // Known caveats: This doesn't account for items in the wrong slot.
-  // This is handled in the matchMapWithWrongSlots function.
-  for (let i = 0; i < VERTICAL_SIZE; i++) {
-    for (let j = 0; j < HORIZONTAL_SIZE; j++) {
-      if (recipe[i][j] === input[i][j]) {
-        if (recipe[i][j] === null) {
-          // If the item is air.
-          matchMap[i][j] = {
-            item: input[i][j],
-            result: MatchMapResult.DEFAULT,
-          };
-        } else {
-          // If the match is correct and an item.
-          matchMap[i][j] = {
-            item: input[i][j],
-            result: MatchMapResult.CORRECT,
-          };
-        }
-      } else {
-        // Our recipe and input don't match.
-        isMatch = false;
-      }
-    }
-  }
+      const result =
+        recipeItem === inputItem
+          ? recipeItem === null
+            ? MatchMapResult.NULL
+            : MatchMapResult.GOOD
+          : MatchMapResult.NULL;
 
-  // Count the number of correct matches.
+      isMatch &&= recipeItem === inputItem;
+
+      return {
+        item: inputItem,
+        result,
+      };
+    })
+  );
+
   const matchCount = matchMap
     .flat()
-    .filter((match) => match.result === MatchMapResult.CORRECT).length;
+    .filter((match) => match.result === MatchMapResult.GOOD).length;
 
   return {
     matchMap,
@@ -109,7 +91,7 @@ const generateVariationWithReflections = ({
       })
     ).flat();
   };
-  
+
   return [
     ...generateVariations({
       recipe: solution,
@@ -151,7 +133,7 @@ const matchMapWithWrongSlots = ({
         continue;
       }
 
-      if (correctSlots[i][j].result === MatchMapResult.CORRECT) {
+      if (correctSlots[i][j].result === MatchMapResult.GOOD) {
         n_items[input[i][j]!]++;
       }
     }
@@ -185,10 +167,10 @@ const matchMapWithWrongSlots = ({
       }
 
       if (
-        correctSlots[i][j].result !== MatchMapResult.CORRECT &&
+        correctSlots[i][j].result !== MatchMapResult.GOOD &&
         n_unidentified_items[input[i][j]!] > 0
       ) {
-        correctSlots[i][j].result = MatchMapResult.ORANGE;
+        correctSlots[i][j].result = MatchMapResult.NEARLY;
         n_unidentified_items[input[i][j]!]--;
       }
     }

@@ -22,13 +22,13 @@
   height: calc(32px * var(--gui-scale));
 }
 
-.slot__correct,
-.slot__correct:hover {
+.slot__good,
+.slot__good:hover {
   background: #22c55e;
 }
 
-.slot__orange,
-.slot__orange:hover {
+.slot__nearly,
+.slot__nearly:hover {
   background: #eab308;
 }
 
