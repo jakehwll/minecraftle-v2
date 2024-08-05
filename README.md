@@ -7,8 +7,6 @@
     Wordle with a Minecraft spin.
   </h1>
 
-[![discord](https://img.shields.io/discord/1260530089532325909?label=discord)](https://discord.gg/5BJpzEmk)
-
 </div>
 
 > [!NOTE]  
@@ -37,10 +35,6 @@ bun dev
 bun install
 bun run build
 ```
-
-## Community
-
-We have a [discord](https://discord.gg/5BJpzEmk).
 
 ## Contributing
 
