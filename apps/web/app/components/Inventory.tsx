@@ -108,18 +108,19 @@ export const Inventory = () => {
       .flat()
       .flat()
       .filter((matchMapResult) => matchMapResult.item === item);
-    if (usedItems.find(({ result }) => result === MatchMapResult.CORRECT)) {
-      return MatchMapResult.CORRECT;
-    } else if (
-      usedItems.find(({ result }) => result === MatchMapResult.ORANGE)
-    ) {
-      return MatchMapResult.ORANGE;
-    } else if (
-      usedItems.find(({ result }) => result === MatchMapResult.DEFAULT)
-    ) {
-      return MatchMapResult.UNUSED;
+
+    switch (true) {
+      case usedItems.some(({ result }) => result === MatchMapResult.NULL):
+        return MatchMapResult.NULL;
+      case usedItems.some(({ result }) => result === MatchMapResult.GOOD):
+        return MatchMapResult.GOOD;
+      case usedItems.some(({ result }) => result === MatchMapResult.NEARLY):
+        return MatchMapResult.NEARLY;
+      case usedItems.some(({ result }) => result === MatchMapResult.BAD):
+        return MatchMapResult.BAD;
+      default:
+        return MatchMapResult.NULL;
     }
-    return MatchMapResult.DEFAULT;
   };
 
   return (
