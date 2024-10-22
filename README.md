@@ -1,3 +1,6 @@
+> [!WARNING]
+> I lost interest in this project and have decided to archive it. Please feel free to fork it and continue it.
+
 <div align="center">
   <a href="https://minecraftle2.vercel.app">
     <img src="./.github/assets/logo.webp" style="width: 256px">
@@ -6,8 +9,6 @@
   <h1>
     Wordle with a Minecraft spin.
   </h1>
-
-[![discord](https://img.shields.io/discord/1260530089532325909?label=discord)](https://discord.gg/5BJpzEmk)
 
 </div>
 
@@ -37,10 +38,6 @@ bun dev
 bun install
 bun run build
 ```
-
-## Community
-
-We have a [discord](https://discord.gg/5BJpzEmk).
 
 ## Contributing
 
