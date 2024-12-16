@@ -11,10 +11,12 @@
     "typecheck": "tsc",
     "env": "bun --env-file=.env --print process.env"
   },
+  "prisma": {
+    "schema": "../../prisma/schema.prisma"
+  },
   "dependencies": {
     "@lucia-auth/adapter-prisma": "^4.0.1",
     "@lucia-auth/adapter-sqlite": "^3.0.2",
-    "@prisma/client": "5.16.2",
     "@radix-ui/react-dialog": "^1.1.1",
     "@remix-run/node": "^2.10.2",
     "@remix-run/react": "^2.10.2",
@@ -29,7 +31,6 @@
     "date-fns": "^3.6.0",
     "isbot": "^4.1.0",
     "lucia": "^3.2.0",
-    "prisma": "^5.16.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remeda": "^2.5.0",

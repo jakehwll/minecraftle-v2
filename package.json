@@ -4,6 +4,10 @@
   "workspaces": [
     "apps/*"
   ],
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "prisma": "^5.17.0"
+  },
   "devDependencies": {
     "turbo": "^2.0.9"
   },
