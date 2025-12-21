@@ -1,24 +1,24 @@
-import { type LoaderFunction, type MetaFunction } from "@remix-run/node";
-import { CraftingTable } from "../components/CraftingTable";
-import { Game } from "../components/Game";
-import { Inventory } from "../components/Inventory";
-import useGameState from "../hooks/useGameState";
-import Tooltip from "../components/Tooltip";
-import Cursor from "../components/Cursor";
+import type { Route } from "./+types/_index";
+import { CraftingTable } from "~/components/CraftingTable";
+import { Game } from "~/components/Game";
+import { Inventory } from "~/components/Inventory";
+import useGameState from "~/hooks/useGameState";
+import Tooltip from "~/components/Tooltip";
+import Cursor from "~/components/Cursor";
 import { useEffect } from "react";
-import useTempState from "../hooks/useTempState";
-import { GameOver } from "../components/GameOver";
-import { Footer } from "../components/Footer";
-import { useUserAgent } from "../hooks/useUserAgent";
+import useTempState from "~/hooks/useTempState";
+import { GameOver } from "~/components/GameOver";
+import { Footer } from "~/components/Footer";
+import { useUserAgent } from "~/hooks/useUserAgent";
 import { format } from "date-fns";
-import { Header } from "../components/Header";
+import { Header } from "~/components/Header";
 import useTooltip from "~/hooks/useTooltip";
 import { contextLoader } from "~/utils/contextLoader.server";
 
-export const loader: LoaderFunction = async ({ request }) =>
+export const loader = async ({ request }: Route.LoaderArgs) =>
   contextLoader(request);
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "Minecraftle" },
     { name: "description", content: "Wordle with a Minecraft Twist!" },

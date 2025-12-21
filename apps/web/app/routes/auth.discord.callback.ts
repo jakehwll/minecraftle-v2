@@ -1,4 +1,5 @@
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { redirect } from "react-router";
+import type { Route } from "./+types/auth.discord.callback";
 import { parseCookies } from "oslo/cookie";
 import { prisma } from "~/utils/database";
 import { discord, Profile } from "~/utils/discord";
@@ -7,7 +8,7 @@ import { lucia } from "~/utils/lucia";
 const DISCORD_API_URL = "https://discord.com/api/v10";
 const DISCORD_ENDPOINT_IDENTIFY = `${DISCORD_API_URL}/users/@me`;
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   const cookies = parseCookies(request.headers.get("Cookie") ?? "");
   const storedState = cookies.get("state") ?? null;
   const storedCodeVerifier = cookies.get("code_verifier") ?? null;

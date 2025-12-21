@@ -1,8 +1,8 @@
-import { checkMatchMap, checkRecipe, MatchMapResult } from "../utils/recipe";
-import useGameState from "../hooks/useGameState";
-import { useItems } from "../hooks/useItems";
-import { RECIPES } from "../hooks/useRecipes";
-import useTempState from "../hooks/useTempState";
+import { checkMatchMap, checkRecipe, MatchMapResult } from "~/utils/recipe";
+import useGameState from "~/hooks/useGameState";
+import { useItems } from "~/hooks/useItems";
+import { RECIPES } from "~/hooks/useRecipes";
+import useTempState from "~/hooks/useTempState";
 import { Button } from "./Button";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";

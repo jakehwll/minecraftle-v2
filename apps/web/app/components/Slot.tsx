@@ -1,7 +1,7 @@
 import cc from "classcat";
-import { MatchMapResult } from "../utils/recipe";
+import { MatchMapResult } from "~/utils/recipe";
 import classes from "./Slot.module.css";
-import { TRANSLATION } from "../hooks/useTranslation";
+import { TRANSLATION } from "~/hooks/useTranslation";
 
 export const Slot = ({
   item,

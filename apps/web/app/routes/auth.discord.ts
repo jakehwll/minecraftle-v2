@@ -1,4 +1,4 @@
-import { redirect } from "@remix-run/node";
+import { redirect } from "react-router";
 import { generateCodeVerifier, generateState } from "arctic";
 import { serializeCookie } from "oslo/cookie";
 import { discord } from "~/utils/discord";

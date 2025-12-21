@@ -1,5 +1,5 @@
-import useMouse from "../hooks/useMouse";
-import useTempState from "../hooks/useTempState";
+import useMouse from "~/hooks/useMouse";
+import useTempState from "~/hooks/useTempState";
 import classes from "./Cursor.module.css";
 
 export default function Cursor() {
