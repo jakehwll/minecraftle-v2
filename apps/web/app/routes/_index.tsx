@@ -1,17 +1,17 @@
 import type { Route } from "./+types/_index";
-import { CraftingTable } from "../components/CraftingTable";
-import { Game } from "../components/Game";
-import { Inventory } from "../components/Inventory";
-import useGameState from "../hooks/useGameState";
-import Tooltip from "../components/Tooltip";
-import Cursor from "../components/Cursor";
+import { CraftingTable } from "~/components/CraftingTable";
+import { Game } from "~/components/Game";
+import { Inventory } from "~/components/Inventory";
+import useGameState from "~/hooks/useGameState";
+import Tooltip from "~/components/Tooltip";
+import Cursor from "~/components/Cursor";
 import { useEffect } from "react";
-import useTempState from "../hooks/useTempState";
-import { GameOver } from "../components/GameOver";
-import { Footer } from "../components/Footer";
-import { useUserAgent } from "../hooks/useUserAgent";
+import useTempState from "~/hooks/useTempState";
+import { GameOver } from "~/components/GameOver";
+import { Footer } from "~/components/Footer";
+import { useUserAgent } from "~/hooks/useUserAgent";
 import { format } from "date-fns";
-import { Header } from "../components/Header";
+import { Header } from "~/components/Header";
 import useTooltip from "~/hooks/useTooltip";
 import { contextLoader } from "~/utils/contextLoader.server";
 

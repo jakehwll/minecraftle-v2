@@ -1,10 +1,10 @@
 import classes from "./Crafting.module.css";
 import { Slot } from "./Slot";
-import image__arrow from "../assets/arrow.png";
-import image__arrow_disabled from "../assets/arrow_disabled.png";
-import { checkMatchMap, checkRecipe } from "../utils/recipe";
+import image__arrow from "~/assets/arrow.png";
+import image__arrow_disabled from "~/assets/arrow_disabled.png";
+import { checkMatchMap, checkRecipe } from "~/utils/recipe";
 import cc from "classcat";
-import { TRANSLATION } from "../hooks/useTranslation";
+import { TRANSLATION } from "~/hooks/useTranslation";
 import { RECIPES } from "~/hooks/useRecipes";
 
 export const Crafting = ({

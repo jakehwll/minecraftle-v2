@@ -1,5 +1,5 @@
 import useGameState from "~/hooks/useGameState";
-import { RECIPES } from "../hooks/useRecipes";
+import { RECIPES } from "~/hooks/useRecipes";
 import { Container } from "./Container";
 import { Crafting } from "./Crafting";
 

@@ -1,5 +1,5 @@
-import useMouse from "../hooks/useMouse";
-import useTooltip from "../hooks/useTooltip";
+import useMouse from "~/hooks/useMouse";
+import useTooltip from "~/hooks/useTooltip";
 import classes from "./Tooltip.module.css";
 
 export default function Tooltip() {
