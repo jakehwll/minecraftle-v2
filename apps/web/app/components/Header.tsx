@@ -4,7 +4,7 @@ import discord from "../assets/discord.svg";
 import { Button, ButtonLink } from "./Button";
 import { Modal } from "./Modal";
 import useGameOptions from "../hooks/useGameOptions";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData } from "react-router";
 import { contextLoader } from "~/utils/contextLoader.server";
 
 export const Header = () => {

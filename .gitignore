@@ -29,6 +29,7 @@ utils/recipes
 
 # Build files
 build
+.react-router
 
 # Env
 .env

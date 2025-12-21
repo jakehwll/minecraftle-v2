@@ -1,4 +1,4 @@
-import { type LoaderFunction, type MetaFunction } from "@remix-run/node";
+import type { Route } from "./+types/_index";
 import { CraftingTable } from "../components/CraftingTable";
 import { Game } from "../components/Game";
 import { Inventory } from "../components/Inventory";
@@ -15,10 +15,10 @@ import { Header } from "../components/Header";
 import useTooltip from "~/hooks/useTooltip";
 import { contextLoader } from "~/utils/contextLoader.server";
 
-export const loader: LoaderFunction = async ({ request }) =>
+export const loader = async ({ request }: Route.LoaderArgs) =>
   contextLoader(request);
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "Minecraftle" },
     { name: "description", content: "Wordle with a Minecraft Twist!" },

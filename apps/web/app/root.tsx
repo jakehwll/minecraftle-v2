@@ -5,8 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  // useLoaderData,
-} from "@remix-run/react";
+} from "react-router";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
@@ -15,9 +14,9 @@ import { GameOptions } from "./components/GameOptions";
 import { Preloader } from "./components/Preloader";
 import { contextLoader } from "./utils/contextLoader.server";
 import { trpc } from "./utils/trpc";
-import { LoaderFunction } from "@remix-run/node";
+import type { Route } from "./+types/root";
 
-export const loader: LoaderFunction = async ({ request }) =>
+export const loader = async ({ request }: Route.LoaderArgs) =>
   contextLoader(request);
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -41,7 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { backend } = useLoaderData<typeof contextLoader>();
+  const { backend } = useLoaderData<typeof loader>();
 
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
