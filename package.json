@@ -4,8 +4,15 @@
   "workspaces": [
     "apps/*"
   ],
+  "scripts": {
+    "dev": "turbo dev",
+    "prisma:generate": "prisma generate"
+  },
   "devDependencies": {
     "turbo": "^2.0.9"
+  },
+  "prisma": {
+    "schema": "apps/web/prisma/schema.prisma"
   },
   "packageManager": "bun@1.1.21"
 }
