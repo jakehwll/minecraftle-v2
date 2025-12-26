@@ -34,6 +34,8 @@ export const Inventory = () => {
 
   const onDrag = (_item: string | null, y: number, x: number) => {
     if (!currentItem || !dragging) return;
+    // Skip if slot already has this item
+    if (inventory[y][x] === currentItem) return;
 
     // We set the current item to the slot item.
     const newInventory = [...inventory];

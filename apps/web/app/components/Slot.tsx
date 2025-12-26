@@ -1,9 +1,10 @@
 import cc from "classcat";
+import { memo, useCallback } from "react";
 import { MatchMapResult } from "~/utils/recipe";
 import classes from "./Slot.module.css";
 import { TRANSLATION } from "~/hooks/useTranslation";
 
-export const Slot = ({
+export const Slot = memo(({
   item,
   status,
   onClick,
@@ -16,6 +17,20 @@ export const Slot = ({
   onDrag?: (item: string | null) => void;
   disabled?: boolean;
 }) => {
+  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+    if (event.button !== 0) return;
+    onClick?.(item);
+  }, [onClick, item]);
+
+  const handleContextMenu = useCallback((event: React.MouseEvent) => {
+    event.preventDefault();
+    onDrag?.(item);
+  }, [onDrag, item]);
+
+  const handleMouseEnter = useCallback(() => {
+    onDrag?.(item);
+  }, [onDrag, item]);
+
   return (
     <div
       className={cc([
@@ -27,15 +42,9 @@ export const Slot = ({
           [classes.slot__disabled]: disabled,
         },
       ])}
-      onMouseDown={(event) => {
-        if ( event.button !== 0 ) return
-        onClick && onClick(item);
-      }}
-      onContextMenu={(event) => {
-        event.preventDefault();
-        onDrag && onDrag(item);
-      }}
-      onMouseMove={() => onDrag && onDrag(item)}
+      onMouseDown={handleMouseDown}
+      onContextMenu={handleContextMenu}
+      onMouseEnter={handleMouseEnter}
       data-tooltip={TRANSLATION[item ?? "undefined"]}
     >
       {item && (
@@ -47,4 +56,4 @@ export const Slot = ({
       )}
     </div>
   );
-};
+});
