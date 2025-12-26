@@ -45,7 +45,7 @@ export default function Page() {
       document.removeEventListener("mousedown", onMouseDown);
       document.removeEventListener("mouseup", onMouseUp);
     };
-  });
+  }, [setDragging]);
 
   useEffect(() => {
     useGameState.persist.rehydrate();
