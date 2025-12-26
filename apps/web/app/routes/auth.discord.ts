@@ -17,7 +17,7 @@ export const action = async () => {
         "Set-Cookie",
         serializeCookie("state", state, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: import.meta.env.NODE_ENV === "production",
           maxAge: 60 * 10,
           path: "/",
         }),
@@ -26,7 +26,7 @@ export const action = async () => {
         "Set-Cookie",
         serializeCookie("code_verifier", codeVerifier, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: import.meta.env.NODE_ENV === "production",
           maxAge: 60 * 10,
           path: "/",
         }),
