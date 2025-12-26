@@ -23,7 +23,7 @@ export interface Profile {
 }
 
 export const discord = new Discord(
-  process.env.DISCORD_AUTH_CLIENT_ID ?? "",
-  process.env.DISCORD_AUTH_CLIENT_SECRET ?? "",
-  process.env.DISCORD_AUTH_CALLBACK_URL ?? ""
+  import.meta.env.DISCORD_AUTH_CLIENT_ID ?? "",
+  import.meta.env.DISCORD_AUTH_CLIENT_SECRET ?? "",
+  import.meta.env.DISCORD_AUTH_CALLBACK_URL ?? ""
 );

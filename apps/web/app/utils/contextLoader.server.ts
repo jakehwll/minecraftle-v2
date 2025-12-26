@@ -7,6 +7,6 @@ export const contextLoader = async (req: Request) => {
 
   return {
     user: session?.user,
-    backend: process.env.VERCEL_URL ?? "localhost:5173",
+    backend: import.meta.env.VERCEL_URL ?? "localhost:5173",
   };
 };

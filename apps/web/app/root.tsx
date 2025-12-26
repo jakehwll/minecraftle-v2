@@ -48,7 +48,7 @@ export default function App() {
       links: [
         httpBatchLink({
           url: `${
-            process.env.NODE_ENV === "development" ? `http://` : `https://`
+            import.meta.env.NODE_ENV === "development" ? `http://` : `https://`
           }${backend}/trpc`,
         }),
       ],
