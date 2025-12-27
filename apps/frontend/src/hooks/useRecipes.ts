@@ -58,6 +58,12 @@ export const RECIPES: {
       [null, "minecraft:iron_ingot", null],
     ],
   },
+  bundle: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:bundle",
+    input: [["minecraft:string"], ["minecraft:leather"]],
+  },
   campfire: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -78,16 +84,6 @@ export const RECIPES: {
       ["minecraft:iron_ingot", "minecraft:iron_ingot", "minecraft:iron_ingot"],
     ],
   },
-  chain: {
-    type: "minecraft:crafting_shaped",
-    group: "",
-    output: "minecraft:chain",
-    input: [
-      ["minecraft:iron_nugget"],
-      ["minecraft:iron_ingot"],
-      ["minecraft:iron_nugget"],
-    ],
-  },
   chest: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -95,6 +91,16 @@ export const RECIPES: {
     input: [
       ["minecraft:planks", "minecraft:planks", "minecraft:planks"],
       ["minecraft:planks", null, "minecraft:planks"],
+      ["minecraft:planks", "minecraft:planks", "minecraft:planks"],
+    ],
+  },
+  chiseled_bookshelf: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:chiseled_bookshelf",
+    input: [
+      ["minecraft:planks", "minecraft:planks", "minecraft:planks"],
+      ["minecraft:oak_slab", "minecraft:oak_slab", "minecraft:oak_slab"],
       ["minecraft:planks", "minecraft:planks", "minecraft:planks"],
     ],
   },
@@ -298,6 +304,16 @@ export const RECIPES: {
     output: "minecraft:diamond_shovel",
     input: [["minecraft:diamond"], ["minecraft:stick"], ["minecraft:stick"]],
   },
+  diamond_spear: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:diamond_spear",
+    input: [
+      [null, null, "minecraft:diamond"],
+      [null, "minecraft:stick", null],
+      ["minecraft:stick", null, null],
+    ],
+  },
   diamond_sword: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -371,6 +387,16 @@ export const RECIPES: {
     input: [
       ["minecraft:glass", "minecraft:glass", "minecraft:glass"],
       ["minecraft:glass", "minecraft:glass", "minecraft:glass"],
+    ],
+  },
+  gold_block: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:gold_block",
+    input: [
+      ["minecraft:gold_ingot", "minecraft:gold_ingot", "minecraft:gold_ingot"],
+      ["minecraft:gold_ingot", "minecraft:gold_ingot", "minecraft:gold_ingot"],
+      ["minecraft:gold_ingot", "minecraft:gold_ingot", "minecraft:gold_ingot"],
     ],
   },
   golden_axe: {
@@ -447,6 +473,16 @@ export const RECIPES: {
     output: "minecraft:golden_shovel",
     input: [["minecraft:gold_ingot"], ["minecraft:stick"], ["minecraft:stick"]],
   },
+  golden_spear: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:golden_spear",
+    input: [
+      [null, null, "minecraft:gold_ingot"],
+      [null, "minecraft:stick", null],
+      ["minecraft:stick", null, null],
+    ],
+  },
   golden_sword: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -455,16 +491,6 @@ export const RECIPES: {
       ["minecraft:gold_ingot"],
       ["minecraft:gold_ingot"],
       ["minecraft:stick"],
-    ],
-  },
-  gold_block: {
-    type: "minecraft:crafting_shaped",
-    group: "",
-    output: "minecraft:gold_block",
-    input: [
-      ["minecraft:gold_ingot", "minecraft:gold_ingot", "minecraft:gold_ingot"],
-      ["minecraft:gold_ingot", "minecraft:gold_ingot", "minecraft:gold_ingot"],
-      ["minecraft:gold_ingot", "minecraft:gold_ingot", "minecraft:gold_ingot"],
     ],
   },
   heavy_weighted_pressure_plate: {
@@ -509,6 +535,16 @@ export const RECIPES: {
     input: [
       ["minecraft:iron_ingot", null, "minecraft:iron_ingot"],
       ["minecraft:iron_ingot", null, "minecraft:iron_ingot"],
+    ],
+  },
+  iron_chain: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:iron_chain",
+    input: [
+      ["minecraft:iron_nugget"],
+      ["minecraft:iron_ingot"],
+      ["minecraft:iron_nugget"],
     ],
   },
   iron_chestplate: {
@@ -598,6 +634,16 @@ export const RECIPES: {
     output: "minecraft:iron_shovel",
     input: [["minecraft:iron_ingot"], ["minecraft:stick"], ["minecraft:stick"]],
   },
+  iron_spear: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:iron_spear",
+    input: [
+      [null, null, "minecraft:iron_ingot"],
+      [null, "minecraft:stick", null],
+      ["minecraft:stick", null, null],
+    ],
+  },
   iron_sword: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -645,6 +691,16 @@ export const RECIPES: {
       ["minecraft:stick", null, "minecraft:stick"],
       ["minecraft:stick", "minecraft:stick", "minecraft:stick"],
       ["minecraft:stick", null, "minecraft:stick"],
+    ],
+  },
+  lead: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:lead",
+    input: [
+      ["minecraft:string", "minecraft:string", null],
+      ["minecraft:string", "minecraft:string", null],
+      [null, null, "minecraft:string"],
     ],
   },
   leather_boots: {
@@ -922,6 +978,15 @@ export const RECIPES: {
       ["minecraft:stone", "minecraft:stone", "minecraft:stone"],
     ],
   },
+  saddle: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:saddle",
+    input: [
+      [null, "minecraft:leather", null],
+      ["minecraft:leather", "minecraft:iron_ingot", "minecraft:leather"],
+    ],
+  },
   shears: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -956,15 +1021,6 @@ export const RECIPES: {
     group: "sticks",
     output: "minecraft:stick",
     input: [["minecraft:planks"], ["minecraft:planks"]],
-  },
-  stonecutter: {
-    type: "minecraft:crafting_shaped",
-    group: "",
-    output: "minecraft:stonecutter",
-    input: [
-      [null, "minecraft:iron_ingot", null],
-      ["minecraft:stone", "minecraft:stone", "minecraft:stone"],
-    ],
   },
   stone_axe: {
     type: "minecraft:crafting_shaped",
@@ -1031,6 +1087,16 @@ export const RECIPES: {
     output: "minecraft:stone_slab",
     input: [["minecraft:stone", "minecraft:stone", "minecraft:stone"]],
   },
+  stone_spear: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:stone_spear",
+    input: [
+      [null, null, "minecraft:cobblestone"],
+      [null, "minecraft:stick", null],
+      ["minecraft:stick", null, null],
+    ],
+  },
   stone_stairs: {
     type: "minecraft:crafting_shaped",
     group: "",
@@ -1049,6 +1115,15 @@ export const RECIPES: {
       ["minecraft:cobblestone"],
       ["minecraft:cobblestone"],
       ["minecraft:stick"],
+    ],
+  },
+  stonecutter: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:stonecutter",
+    input: [
+      [null, "minecraft:iron_ingot", null],
+      ["minecraft:stone", "minecraft:stone", "minecraft:stone"],
     ],
   },
   torch: {
@@ -1091,6 +1166,15 @@ export const RECIPES: {
     group: "carpet",
     output: "minecraft:white_carpet",
     input: [["minecraft:white_wool", "minecraft:white_wool"]],
+  },
+  white_harness: {
+    type: "minecraft:crafting_shaped",
+    group: "harness",
+    output: "minecraft:white_harness",
+    input: [
+      ["minecraft:leather", "minecraft:leather", "minecraft:leather"],
+      ["minecraft:glass", "minecraft:white_wool", "minecraft:glass"],
+    ],
   },
   white_wool_from_string: {
     type: "minecraft:crafting_shaped",
@@ -1136,6 +1220,16 @@ export const RECIPES: {
     group: "",
     output: "minecraft:wooden_shovel",
     input: [["minecraft:planks"], ["minecraft:stick"], ["minecraft:stick"]],
+  },
+  wooden_spear: {
+    type: "minecraft:crafting_shaped",
+    group: "",
+    output: "minecraft:wooden_spear",
+    input: [
+      [null, null, "minecraft:planks"],
+      [null, "minecraft:stick", null],
+      ["minecraft:stick", null, null],
+    ],
   },
   wooden_sword: {
     type: "minecraft:crafting_shaped",

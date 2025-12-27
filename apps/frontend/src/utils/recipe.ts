@@ -1,10 +1,12 @@
-export enum MatchMapResult {
-  DEFAULT = "Default",
-  CORRECT = "Correct",
-  WRONG = "Wrong",
-  ORANGE = "Orange",
-  UNUSED = "Unused",
-}
+export const MatchMapResult = {
+  DEFAULT: "Default",
+  CORRECT: "Correct",
+  WRONG: "Wrong",
+  ORANGE: "Orange",
+  UNUSED: "Unused",
+} as const;
+
+export type MatchMapResult = (typeof MatchMapResult)[keyof typeof MatchMapResult];
 
 export type MatchMap = Array<Array<{
   item: string | null;
