@@ -43,7 +43,7 @@ export const GameOver = () => {
         <>
           <div className={classes.crafting}>
             <Crafting
-              craftingTable={craftingTables[craftingTables.length - 1]}
+              craftingTable={solution.input}
               disabled
             />
           </div>
