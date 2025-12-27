@@ -1,13 +1,13 @@
-import useGameState from "../hooks/useGameState";
-import { Button } from "./Button";
-import { Crafting } from "./Crafting";
-import { Modal } from "./Modal";
+import useGameState from "../../hooks/useGameState";
+import { Button } from "../Button/Button";
+import { Crafting } from "../Crafting/Crafting";
+import { Modal } from "../Modal/Modal";
 import classes from "./GameOver.module.css";
 import { useEffect, useState } from "react";
-import { checkMatchMap } from "../utils/recipe";
-import { matchMapToEmoji } from "../utils/emoji";
-import { RECIPES } from "../hooks/useRecipes";
-import { TRANSLATION } from "../hooks/useTranslation";
+import { checkMatchMap } from "../../utils/recipe";
+import { matchMapToEmoji } from "../../utils/emoji";
+import { RECIPES } from "../../hooks/useRecipes";
+import { TRANSLATION } from "../../hooks/useTranslation";
 
 export const GameOver = () => {
   const { gameState, craftingTables } = useGameState();

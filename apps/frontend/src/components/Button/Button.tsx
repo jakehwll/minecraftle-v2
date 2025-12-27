@@ -1,5 +1,5 @@
 import cc from "classcat";
-import { ComponentProps, forwardRef } from "react";
+import { type ComponentProps, forwardRef } from "react";
 import classes from "./Button.module.css";
 
 interface Props {

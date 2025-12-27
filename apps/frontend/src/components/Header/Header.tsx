@@ -1,8 +1,8 @@
 import classes from "./Header.module.css";
-import logo from "../assets/logo.webp";
-import { Button, ButtonLink } from "./Button";
-import { Modal } from "./Modal";
-import useGameOptions from "../hooks/useGameOptions";
+import logo from "../../assets/logo.webp";
+import { Button } from "../Button/Button";
+import { Modal } from "../Modal/Modal";
+import useGameOptions from "../../hooks/useGameOptions";
 
 export const Header = () => {
   const { guiScale, setGuiScale } = useGameOptions();

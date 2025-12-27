@@ -1,8 +1,8 @@
 import cc from "classcat";
 import { memo, useCallback } from "react";
-import { MatchMapResult } from "../utils/recipe";
+import { MatchMapResult } from "../../utils/recipe";
 import classes from "./Slot.module.css";
-import { TRANSLATION } from "../hooks/useTranslation";
+import { TRANSLATION } from "../../hooks/useTranslation";
 
 export const Slot = memo(({
   item,

@@ -1,7 +1,7 @@
-import useGameState from "../hooks/useGameState";
-import { RECIPES } from "../hooks/useRecipes";
-import { Container } from "./Container";
-import { Crafting } from "./Crafting";
+import useGameState from "../../hooks/useGameState";
+import { RECIPES } from "../../hooks/useRecipes";
+import { Container } from "../Container/Container";
+import { Crafting } from "../Crafting/Crafting";
 
 export const CraftingTable = ({
   craftingTable

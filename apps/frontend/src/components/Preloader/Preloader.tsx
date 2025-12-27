@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./Preloader.module.css";
-import { Loading } from "./Loading";
+import { Loading } from "../Loading/Loading";
 
 const ASSETS_TO_PRELOAD = [
   "background-button.png",

@@ -9,7 +9,7 @@ import {
   Close,
   type DialogProps,
 } from "@radix-ui/react-dialog";
-import { Button } from "./Button";
+import { Button } from "../Button/Button";
 import classes from "./Modal.module.css";
 
 export const Modal = ({

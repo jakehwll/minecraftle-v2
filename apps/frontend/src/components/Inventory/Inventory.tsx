@@ -1,13 +1,13 @@
-import { checkMatchMap, checkRecipe, MatchMapResult } from "../utils/recipe";
-import useGameState from "../hooks/useGameState";
-import { useItems } from "../hooks/useItems";
-import { RECIPES } from "../hooks/useRecipes";
-import useTempState from "../hooks/useTempState";
-import { Button } from "./Button";
-import { Container } from "./Container";
-import { Crafting } from "./Crafting";
+import { checkMatchMap, checkRecipe, MatchMapResult } from "../../utils/recipe";
+import useGameState from "../../hooks/useGameState";
+import { useItems } from "../../hooks/useItems";
+import { RECIPES } from "../../hooks/useRecipes";
+import useTempState from "../../hooks/useTempState";
+import { Button } from "../Button/Button";
+import { Container } from "../Container/Container";
+import { Crafting } from "../Crafting/Crafting";
 import classes from "./Inventory.module.css";
-import { Slot } from "./Slot";
+import { Slot } from "../Slot/Slot";
 import { useMemo } from "react";
 
 export const Inventory = () => {

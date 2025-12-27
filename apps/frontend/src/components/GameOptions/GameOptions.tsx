@@ -1,4 +1,4 @@
-import useGameOptions from "../hooks/useGameOptions";
+import useGameOptions from "../../hooks/useGameOptions";
 
 export const GameOptions = () => {
   const { guiScale } = useGameOptions()
