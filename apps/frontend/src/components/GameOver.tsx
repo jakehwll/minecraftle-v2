@@ -1,5 +1,5 @@
 import useGameState from "../hooks/useGameState";
-import { Button, ButtonLink } from "./Button";
+import { Button } from "./Button";
 import { Crafting } from "./Crafting";
 import { Modal } from "./Modal";
 import classes from "./GameOver.module.css";
@@ -17,18 +17,14 @@ export const GameOver = () => {
   useEffect(() => {
     if (!shared) return;
     const clipboard = [
-      `Minecraftle - ${craftingTables.length}/10`,
+      `Minecraftle - ${gameState === "lost" ? "X" : craftingTables.length}/10`,
       "<https://minecraftle2.vercel.app/>",
       "",
-      ...craftingTables.map((table) => [
-        matchMapToEmoji({
-          matchMap: checkMatchMap({
-            recipe: RECIPES[recipe].input,
-            input: table,
-          }),
-        }),
-        ""
-      ]),
+      ...(
+        craftingTables.map((table) =>
+          matchMapToEmoji({ matchMap: checkMatchMap({ recipe: RECIPES[recipe].input, input: table }) }),
+        )
+      ),
     ].flat();
     navigator.clipboard.writeText(clipboard.join("\n"));
     setTimeout(() => setShared(false), 3000);
@@ -57,9 +53,6 @@ export const GameOver = () => {
           <Button fullWidth onClick={() => setShared(true)}>
             {shared ? "Copied!" : "Copy Results"}
           </Button>
-          <ButtonLink href={"/statistics"} fullWidth>
-            View Statistics
-          </ButtonLink>
         </>
       }
       props={{

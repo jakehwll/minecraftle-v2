@@ -15,5 +15,5 @@ export const matchMapToEmoji = ({ matchMap }: { matchMap: MatchMap }) => {
           break;
       }
     }).flat().join("")
-  ).join('\n');
+  ).join('');
 };
